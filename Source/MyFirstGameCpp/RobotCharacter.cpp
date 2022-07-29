@@ -24,8 +24,6 @@ ARobotCharacter::ARobotCharacter()
 		VisualMesh->SetSkeletalMesh(AntBotVisualAsset.Object);
 	}
 
-	
-
 	// set animation for mesh
 	static ConstructorHelpers::FObjectFinder<UAnimBlueprint> AnimationBlueprint(TEXT("AnimBlueprint'/Game/Character/Animations/APB_Bot.APB_Bot'"));
 	if (AnimationBlueprint.Succeeded())
@@ -87,23 +85,6 @@ void ARobotCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComp
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
 
 }
-
-//void ARobotCharacter::MoveY(float AxisValue)
-//{
-//	//CurrentVelocity.Y = FMath::Clamp(AxisValue, -1.0f, 1.0f) * 600.0f;
-//	//addmove
-//	FRotator Rotation = VisualMesh->GetRelativeRotation();
-//	FVector Direction = FRotationMatrix(Rotation).GetScaledAxis(EAxis::Y);
-//	AddMovementInput(Direction, AxisValue);
-//}
-
-//void ARobotCharacter::MoveX(float AxisValue)
-//{
-//	//CurrentVelocity.X = FMath::Clamp(-AxisValue, -1.0f, 1.0f) * 300.0f;
-//	FRotator Rotation = VisualMesh->GetRelativeRotation();
-//	FVector Direction = FRotationMatrix(Rotation).GetScaledAxis(EAxis::X);
-//	AddMovementInput(Direction, -AxisValue);
-//}
 
 void ARobotCharacter::SpringArmY(float AxisValue)
 {
