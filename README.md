@@ -1,5 +1,5 @@
 # 🧩🤖 Puzzle Bot (Unreal Engine 5)
-Puzzle Bot is an Unreal Engine 5 sample project built by @SkyeHoefling. This game demo is a learning project where many techniques were implemented using C++ instead of the Blueprint Designer.
+Puzzle Bot is an Unreal Engine 5 sample project built by [@SkyeHoefling](https://github.com/SkyeHoefling). This game demo is a learning project where many techniques were implemented using C++ instead of the Blueprint Designer.
 
 # Screenshots
 TODO
