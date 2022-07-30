@@ -88,6 +88,8 @@ void ARobotCharacterWithCamera::SetOverTheShoulderCamera()
 
 	Camera->SetFieldOfView(45.0f);
 	Camera->SetProjectionMode(ECameraProjectionMode::Perspective);
+
+	GetCharacterMovement()->bOrientRotationToMovement = false;
 }
 
 void ARobotCharacterWithCamera::SetFixedRotationCamera()
