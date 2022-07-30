@@ -22,7 +22,6 @@ public:
 	
 	UPROPERTY(VisibleAnywhere)
 	USkeletalMeshComponent* VisualMesh;
-
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;

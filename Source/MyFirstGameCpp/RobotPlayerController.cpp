@@ -20,6 +20,7 @@ void ARobotPlayerController::SetupInputComponent()
 
 	// Interactions
 	InputComponent->BindAction("SpawnOrb", IE_Pressed, this, &ARobotPlayerController::SpawnOrb);
+	InputComponent->BindAction("ToggleCamera", IE_Pressed, this, &ARobotPlayerController::ToggleCamera);
 }
 
 void ARobotPlayerController::MoveY(float AxisValue)
@@ -62,4 +63,9 @@ void ARobotPlayerController::SpawnOrb()
 {
 	FVector Location = Robot->GetActorLocation();
 	GetWorld()->SpawnActor(AOrbActor::StaticClass(), &Location);
+}
+
+void ARobotPlayerController::ToggleCamera()
+{
+	Robot->ToggleCamera();
 }

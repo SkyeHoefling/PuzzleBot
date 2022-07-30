@@ -15,11 +15,8 @@ ARobotCharacterWithCamera::ARobotCharacterWithCamera()
 	SpringArm->SetupAttachment(RootComponent);
 	Camera->SetupAttachment(SpringArm, USpringArmComponent::SocketName);
 
-	SpringArm->TargetArmLength = 2000.0f;
-	SpringArm->SetWorldRotation(FQuat(FRotator3d(-50.0f, 0.0f, 0.0f)));
-
-	Camera->SetFieldOfView(45.0f);
-	Camera->SetProjectionMode(ECameraProjectionMode::Perspective);
+	ActiveCamera = -1;
+	SetOverTheShoulderCamera();
 }
 
 // Called when the game starts or when spawned
@@ -51,15 +48,66 @@ void ARobotCharacterWithCamera::Tick(float DeltaTime)
 void ARobotCharacterWithCamera::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
-
 }
 
 void ARobotCharacterWithCamera::SpringArmY(float AxisValue)
 {
-	SpringArmRotationDelta.Pitch = FMath::Clamp(AxisValue, -1.0f, 1.0f) * 100.0f;
+	if (ActiveCamera == 0)
+		SpringArmRotationDelta.Pitch = FMath::Clamp(AxisValue, -1.0f, 1.0f) * 100.0f;
 }
 
 void ARobotCharacterWithCamera::SpringArmX(float AxisValue)
 {
-	SpringArmRotationDelta.Yaw = VisualMeshRotationDelta.Yaw = FMath::Clamp(AxisValue, -1.0f, 1.0f) * 100.0f;
+	if (ActiveCamera == 0)
+		SpringArmRotationDelta.Yaw = VisualMeshRotationDelta.Yaw = FMath::Clamp(AxisValue, -1.0f, 1.0f) * 100.0f;
+}
+
+void ARobotCharacterWithCamera::ToggleCamera()
+{
+	if (ActiveCamera == 0)
+		SetFixedRotationCamera();
+	else if (ActiveCamera == 1)
+		SetFixedZoneCamera();
+	else
+		SetOverTheShoulderCamera();
+}
+
+void ARobotCharacterWithCamera::SetOverTheShoulderCamera()
+{
+	if (ActiveCamera == 0)
+		return;
+
+	ActiveCamera = 0;
+
+	FRotator RelativeRotation = VisualMesh->GetRelativeRotation();
+	RelativeRotation.Pitch -= 20.0f;
+	RelativeRotation.Yaw -= -90.0f;
+
+	SpringArm->TargetArmLength = 1000.0f;
+	SpringArm->SetRelativeRotation(FQuat(RelativeRotation));
+
+	Camera->SetFieldOfView(45.0f);
+	Camera->SetProjectionMode(ECameraProjectionMode::Perspective);
+}
+
+void ARobotCharacterWithCamera::SetFixedRotationCamera()
+{
+	if (ActiveCamera == 1)
+		return;
+
+	ActiveCamera = 1;
+
+	SpringArm->TargetArmLength = 2000.0f;
+	SpringArm->SetWorldRotation(FQuat(FRotator3d(-50.0f, 0.0f, 0.0f)));
+
+	Camera->SetFieldOfView(45.0f);
+	Camera->SetProjectionMode(ECameraProjectionMode::Perspective);
+}
+
+void ARobotCharacterWithCamera::SetFixedZoneCamera()
+{
+	if (ActiveCamera == 2)
+		return;
+
+	ActiveCamera = 2;
 }

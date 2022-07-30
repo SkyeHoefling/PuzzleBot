@@ -24,6 +24,7 @@ public:
 	void SpringArmY(float AxisValue);
 	void SpringArmX(float AxisValue);
 	void SpawnOrb();
+	void ToggleCamera();
 
 	ARobotCharacterWithCamera* Robot;
 protected:

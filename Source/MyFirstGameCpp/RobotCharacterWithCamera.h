@@ -21,10 +21,18 @@ public:
 
 	UPROPERTY(VisibleAnywhere)
 	UCameraComponent* Camera;
+private:
+	void SetOverTheShoulderCamera();
+	void SetFixedRotationCamera();
+	void SetFixedZoneCamera();
+
+	int ActiveCamera; // 0 = OverTheshoulder, 1 = FixedRotation, 2 = FixedZone
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
+	FRotator SpringArmRotationDelta;
+	FRotator VisualMeshRotationDelta;
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
@@ -35,6 +43,5 @@ public:
 	void SpringArmY(float AxisValue);
 	void SpringArmX(float AxisValue);
 
-	FRotator SpringArmRotationDelta;
-	FRotator VisualMeshRotationDelta;
+	void ToggleCamera();
 };
