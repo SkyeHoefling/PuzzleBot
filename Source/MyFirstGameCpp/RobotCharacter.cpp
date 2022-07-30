@@ -38,9 +38,7 @@ ARobotCharacter::ARobotCharacter()
 	Capsule->SetCapsuleHalfHeight(70.0f);
 	Capsule->SetCapsuleRadius(25.0f);
 
-	UCharacterMovementComponent* CharacterMovementComponent = GetCharacterMovement();
-	//CharacterMovementComponent->bOrientRotationToMovement = true;
-	CharacterMovementComponent->MaxAcceleration = 500.0f;
+	GetCharacterMovement()->MaxAcceleration = 500.0f;
 }
 
 // Called when the game starts or when spawned

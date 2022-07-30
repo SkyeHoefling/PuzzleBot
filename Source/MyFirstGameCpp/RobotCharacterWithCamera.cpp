@@ -81,7 +81,7 @@ void ARobotCharacterWithCamera::SetOverTheShoulderCamera()
 
 	FRotator RelativeRotation = VisualMesh->GetRelativeRotation();
 	RelativeRotation.Pitch -= 20.0f;
-	RelativeRotation.Yaw -= -90.0f;
+	RelativeRotation.Yaw -= -90.0f; // Matches the initial rotation
 
 	SpringArm->TargetArmLength = 1000.0f;
 	SpringArm->SetRelativeRotation(FQuat(RelativeRotation));
@@ -102,6 +102,8 @@ void ARobotCharacterWithCamera::SetFixedRotationCamera()
 
 	Camera->SetFieldOfView(45.0f);
 	Camera->SetProjectionMode(ECameraProjectionMode::Perspective);
+
+	GetCharacterMovement()->bOrientRotationToMovement = true;
 }
 
 void ARobotCharacterWithCamera::SetFixedZoneCamera()
