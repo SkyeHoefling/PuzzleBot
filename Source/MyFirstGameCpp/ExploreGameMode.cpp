@@ -6,6 +6,6 @@
 // Sets default values
 AExploreGameMode::AExploreGameMode()
 {
-	DefaultPawnClass = ARobotCharacter::StaticClass();
+	DefaultPawnClass = ARobotCharacterWithCamera::StaticClass();
 	PlayerControllerClass = ARobotPlayerController::StaticClass();
 }

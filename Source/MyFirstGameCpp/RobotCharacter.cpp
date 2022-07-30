@@ -10,12 +10,6 @@ ARobotCharacter::ARobotCharacter()
 	PrimaryActorTick.bCanEverTick = true;
 	
 	VisualMesh = GetMesh();
-	SpringArm = CreateDefaultSubobject<USpringArmComponent>("Spring Arm");
-	Camera = CreateDefaultSubobject<UCameraComponent>("Camera");
-
-	SpringArm->SetupAttachment(RootComponent);
-	Camera->SetupAttachment(SpringArm, USpringArmComponent::SocketName);
-
 	
 	// Get mesh for the robotSkeletalMesh 
 	static ConstructorHelpers::FObjectFinder<USkeletalMesh> AntBotVisualAsset(TEXT("/Game/Character/SKM_Antbot.SKM_Antbot"));
@@ -47,12 +41,6 @@ ARobotCharacter::ARobotCharacter()
 	UCharacterMovementComponent* CharacterMovementComponent = GetCharacterMovement();
 	//CharacterMovementComponent->bOrientRotationToMovement = true;
 	CharacterMovementComponent->MaxAcceleration = 500.0f;
-
-	SpringArm->TargetArmLength = 1000.0f;
-	SpringArm->SetWorldRotation(FQuat(FRotator3d(-15.0f, 0.0f, 0.0f)));
-
-	Camera->SetFieldOfView(45.0f);
-	Camera->SetProjectionMode(ECameraProjectionMode::Perspective);
 }
 
 // Called when the game starts or when spawned
@@ -65,33 +53,10 @@ void ARobotCharacter::BeginPlay()
 void ARobotCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
-	if (!SpringArmRotationDelta.IsZero())
-	{
-
-		FRotator NewCameraDelta = SpringArm->GetRelativeRotation() + (SpringArmRotationDelta * DeltaTime);
-		FRotator NewVisualMeshDelta = VisualMesh->GetRelativeRotation() + (VisualMeshRotationDelta * DeltaTime);
-
-		NewCameraDelta.Pitch = FMath::Clamp(NewCameraDelta.Pitch, -50.0f, -15.0f);
-
-		SpringArm->SetRelativeRotation(NewCameraDelta);
-		VisualMesh->SetRelativeRotation(NewVisualMeshDelta);
-	}
 }
 
 // Called to bind functionality to input
 void ARobotCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
-
-}
-
-void ARobotCharacter::SpringArmY(float AxisValue)
-{
-	SpringArmRotationDelta.Pitch = FMath::Clamp(AxisValue, -1.0f, 1.0f) * 100.0f;
-}
-
-void ARobotCharacter::SpringArmX(float AxisValue)
-{
-	SpringArmRotationDelta.Yaw = VisualMeshRotationDelta.Yaw = FMath::Clamp(AxisValue, -1.0f, 1.0f) * 100.0f;
 }

@@ -5,7 +5,7 @@
 
 void ARobotPlayerController::BeginPlay()
 {
-	Robot = Cast<ARobotCharacter>(GetCharacter());
+	Robot = Cast<ARobotCharacterWithCamera>(GetCharacter());
 }
 
 void ARobotPlayerController::SetupInputComponent()

@@ -4,7 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/PlayerController.h"
-#include "RobotCharacter.h"
+#include "RobotCharacterWithCamera.h"
 #include "OrbActor.h"
 #include "RobotPlayerController.generated.h"
 
@@ -25,7 +25,7 @@ public:
 	void SpringArmX(float AxisValue);
 	void SpawnOrb();
 
-	ARobotCharacter* Robot;
+	ARobotCharacterWithCamera* Robot;
 protected:
 	virtual void BeginPlay() override;
 };
