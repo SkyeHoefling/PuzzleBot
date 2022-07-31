@@ -37,8 +37,17 @@ ARobotCharacter::ARobotCharacter()
 	UCapsuleComponent* Capsule = GetCapsuleComponent();
 	Capsule->SetCapsuleHalfHeight(70.0f);
 	Capsule->SetCapsuleRadius(25.0f);
+	
+	// Needed to rotate charactered in direction of travel
+	bUseControllerRotationPitch = false;
+	bUseControllerRotationRoll = false;
+	bUseControllerRotationYaw = false;
 
-	GetCharacterMovement()->MaxAcceleration = 500.0f;
+	// Needed to rotate charactered in direction of travel
+	UCharacterMovementComponent* CharacterMovementComponent = GetCharacterMovement();
+	CharacterMovementComponent->bOrientRotationToMovement = true;
+	CharacterMovementComponent->MaxAcceleration = 500.0f;
+	CharacterMovementComponent->bUseControllerDesiredRotation = true;
 }
 
 // Called when the game starts or when spawned

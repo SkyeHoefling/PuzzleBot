@@ -28,9 +28,10 @@ void ARobotPlayerController::MoveY(float AxisValue)
 	if (!Robot)
 		return;
 
-	FRotator RelativeRotation = Robot->GetMesh()->GetRelativeRotation();
-	FVector Direction = FRotationMatrix(RelativeRotation).GetScaledAxis(EAxis::Y);
-	Robot->AddMovementInput(Direction, -AxisValue);
+	FRotator Rotation = Robot->SpringArm->GetRelativeRotation();
+	Rotation.Pitch = 0;
+	FVector Direction = Rotation.Vector();
+	Robot->AddMovementInput(Direction, AxisValue);
 }
 
 void ARobotPlayerController::MoveX(float AxisValue)
@@ -38,8 +39,10 @@ void ARobotPlayerController::MoveX(float AxisValue)
 	if (!Robot)
 		return;
 
-	FRotator RelativeRotation = Robot->GetMesh()->GetRelativeRotation();
-	FVector Direction = FRotationMatrix(RelativeRotation).GetScaledAxis(EAxis::X);
+	FRotator Rotation = Robot->SpringArm->GetRelativeRotation();
+	Rotation.Pitch = 0;
+	Rotation.Yaw += 90;
+	FVector Direction = Rotation.Vector();
 	Robot->AddMovementInput(Direction, AxisValue);
 }
 

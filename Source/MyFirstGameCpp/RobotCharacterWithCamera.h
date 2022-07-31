@@ -40,8 +40,10 @@ public:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
-	void SpringArmY(float AxisValue);
 	void SpringArmX(float AxisValue);
+	void SpringArmY(float AxisValue);
+	void MoveX(float AxisValue);
+	void MoveY(float AxisValue);
 
 	void ToggleCamera();
 };

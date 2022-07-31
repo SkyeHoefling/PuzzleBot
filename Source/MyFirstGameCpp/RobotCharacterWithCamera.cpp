@@ -16,14 +16,13 @@ ARobotCharacterWithCamera::ARobotCharacterWithCamera()
 	Camera->SetupAttachment(SpringArm, USpringArmComponent::SocketName);
 
 	ActiveCamera = -1;
-	SetOverTheShoulderCamera();
+	SetFixedRotationCamera();
 }
 
 // Called when the game starts or when spawned
 void ARobotCharacterWithCamera::BeginPlay()
 {
 	Super::BeginPlay();
-	
 }
 
 // Called every frame
@@ -33,14 +32,13 @@ void ARobotCharacterWithCamera::Tick(float DeltaTime)
 
 	if (!SpringArmRotationDelta.IsZero())
 	{
-
 		FRotator NewCameraDelta = SpringArm->GetRelativeRotation() + (SpringArmRotationDelta * DeltaTime);
 		FRotator NewVisualMeshDelta = VisualMesh->GetRelativeRotation() + (VisualMeshRotationDelta * DeltaTime);
 
 		NewCameraDelta.Pitch = FMath::Clamp(NewCameraDelta.Pitch, -50.0f, -15.0f);
 
 		SpringArm->SetRelativeRotation(NewCameraDelta);
-		VisualMesh->SetRelativeRotation(NewVisualMeshDelta);
+		//VisualMesh->SetRelativeRotation(NewVisualMeshDelta);
 	}
 }
 
@@ -50,16 +48,28 @@ void ARobotCharacterWithCamera::SetupPlayerInputComponent(UInputComponent* Playe
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
 }
 
+void ARobotCharacterWithCamera::SpringArmX(float AxisValue)
+{
+	if (ActiveCamera == 0)
+		SpringArmRotationDelta.Yaw = VisualMeshRotationDelta.Yaw = FMath::Clamp(AxisValue, -1.0f, 1.0f) * 100.0f;
+}
+
 void ARobotCharacterWithCamera::SpringArmY(float AxisValue)
 {
 	if (ActiveCamera == 0)
 		SpringArmRotationDelta.Pitch = FMath::Clamp(AxisValue, -1.0f, 1.0f) * 100.0f;
 }
 
-void ARobotCharacterWithCamera::SpringArmX(float AxisValue)
+void ARobotCharacterWithCamera::MoveX(float AxisValue)
 {
 	if (ActiveCamera == 0)
 		SpringArmRotationDelta.Yaw = VisualMeshRotationDelta.Yaw = FMath::Clamp(AxisValue, -1.0f, 1.0f) * 100.0f;
+}
+
+void ARobotCharacterWithCamera::MoveY(float AxisValue)
+{
+	if (ActiveCamera == 0)
+		SpringArmRotationDelta.Pitch = FMath::Clamp(AxisValue, -1.0f, 1.0f) * 100.0f;
 }
 
 void ARobotCharacterWithCamera::ToggleCamera()
@@ -84,12 +94,11 @@ void ARobotCharacterWithCamera::SetOverTheShoulderCamera()
 	RelativeRotation.Yaw -= -90.0f; // Matches the initial rotation
 
 	SpringArm->TargetArmLength = 1000.0f;
+	SpringArm->SetUsingAbsoluteRotation(true);
 	SpringArm->SetRelativeRotation(FQuat(RelativeRotation));
 
 	Camera->SetFieldOfView(45.0f);
 	Camera->SetProjectionMode(ECameraProjectionMode::Perspective);
-
-	GetCharacterMovement()->bOrientRotationToMovement = false;
 }
 
 void ARobotCharacterWithCamera::SetFixedRotationCamera()
@@ -99,13 +108,14 @@ void ARobotCharacterWithCamera::SetFixedRotationCamera()
 
 	ActiveCamera = 1;
 
-	SpringArm->TargetArmLength = 2000.0f;
-	SpringArm->SetWorldRotation(FQuat(FRotator3d(-50.0f, 0.0f, 0.0f)));
-
 	Camera->SetFieldOfView(45.0f);
 	Camera->SetProjectionMode(ECameraProjectionMode::Perspective);
 
-	GetCharacterMovement()->bOrientRotationToMovement = true;
+	SpringArm->TargetArmLength = 2000.0f;
+
+	// Must be called to ensure SpringArm remains in world coords
+	SpringArm->SetUsingAbsoluteRotation(true); 
+	SpringArm->SetWorldRotation(FQuat(FRotator3d(-50.0f, 0.0f, 0.0f)));
 }
 
 void ARobotCharacterWithCamera::SetFixedZoneCamera()
