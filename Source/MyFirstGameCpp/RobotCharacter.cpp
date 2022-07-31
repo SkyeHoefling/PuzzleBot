@@ -46,7 +46,7 @@ ARobotCharacter::ARobotCharacter()
 	// Needed to rotate charactered in direction of travel
 	UCharacterMovementComponent* CharacterMovementComponent = GetCharacterMovement();
 	CharacterMovementComponent->bOrientRotationToMovement = true;
-	CharacterMovementComponent->MaxAcceleration = 500.0f;
+	CharacterMovementComponent->MaxAcceleration = 400.0f;
 	CharacterMovementComponent->bUseControllerDesiredRotation = true;
 }
 

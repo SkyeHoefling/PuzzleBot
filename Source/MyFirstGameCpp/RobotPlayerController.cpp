@@ -14,7 +14,7 @@ void ARobotPlayerController::SetupInputComponent()
 
 	// Movement
 	InputComponent->BindAxis("ForwardBack", this, &ARobotPlayerController::MoveY);
-	InputComponent->BindAxis("StrafeLeftRight", this, &ARobotPlayerController::MoveX);
+	InputComponent->BindAxis("LeftRight", this, &ARobotPlayerController::MoveX);
 	InputComponent->BindAxis("Camera_Y", this, &ARobotPlayerController::SpringArmY);
 	InputComponent->BindAxis("Camera_X", this, &ARobotPlayerController::SpringArmX);
 
