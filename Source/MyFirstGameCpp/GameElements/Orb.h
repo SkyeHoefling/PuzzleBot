@@ -4,16 +4,16 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
-#include "OrbActor.generated.h"
+#include "Orb.generated.h"
 
 UCLASS()
-class MYFIRSTGAMECPP_API AOrbActor : public AActor
+class MYFIRSTGAMECPP_API AOrb : public AActor
 {
 	GENERATED_BODY()
 	
 public:	
 	// Sets default values for this actor's properties
-	AOrbActor();
+	AOrb();
 
 	UPROPERTY(VisibleAnywhere)
 	UStaticMeshComponent* StaticMesh;

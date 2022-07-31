@@ -4,8 +4,8 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/PlayerController.h"
-#include "RobotCharacterWithCamera.h"
-#include "OrbActor.h"
+#include "../Character/RobotCharacterWithCamera.h"
+#include "../GameElements/Orb.h"
 #include "RobotPlayerController.generated.h"
 
 /**

@@ -65,7 +65,7 @@ void ARobotPlayerController::SpringArmX(float AxisValue)
 void ARobotPlayerController::SpawnOrb()
 {
 	FVector Location = Robot->GetActorLocation();
-	GetWorld()->SpawnActor(AOrbActor::StaticClass(), &Location);
+	GetWorld()->SpawnActor(AOrb::StaticClass(), &Location);
 }
 
 void ARobotPlayerController::ToggleCamera()

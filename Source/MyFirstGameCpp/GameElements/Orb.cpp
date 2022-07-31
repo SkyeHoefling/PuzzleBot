@@ -1,10 +1,10 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 
-#include "OrbActor.h"
+#include "Orb.h"
 
 // Sets default values
-AOrbActor::AOrbActor()
+AOrb::AOrb()
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
@@ -22,22 +22,22 @@ AOrbActor::AOrbActor()
 	StaticMesh->SetCollisionResponseToChannel(ECollisionChannel::ECC_Pawn, ECollisionResponse::ECR_Overlap);
 	StaticMesh->SetCollisionResponseToChannel(ECollisionChannel::ECC_Camera, ECollisionResponse::ECR_Overlap);
 
-	StaticMesh->OnComponentBeginOverlap.AddDynamic(this, &AOrbActor::OnOrbCollected);
+	StaticMesh->OnComponentBeginOverlap.AddDynamic(this, &AOrb::OnOrbCollected);
 }
 
 // Called when the game starts or when spawned
-void AOrbActor::BeginPlay()
+void AOrb::BeginPlay()
 {
 	Super::BeginPlay();
 }
 
 // Called every frame
-void AOrbActor::Tick(float DeltaTime)
+void AOrb::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 }
 
-void AOrbActor::OnOrbCollected(class UPrimitiveComponent* OverlappedComp, class AActor* OtherActor, class UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
+void AOrb::OnOrbCollected(class UPrimitiveComponent* OverlappedComp, class AActor* OtherActor, class UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
 	APawn* Pawn = Cast<APawn>(OtherActor);
 	if (!Pawn || Pawn->IsPlayerControlled())

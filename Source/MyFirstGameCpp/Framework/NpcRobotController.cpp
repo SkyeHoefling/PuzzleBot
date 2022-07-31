@@ -20,7 +20,7 @@ void ANpcRobotController::SearchAndDestroy()
 	UWorld* World = GetWorld();
 	TargetOrb = NULL;
 	
-	for (TActorIterator<AOrbActor> It(World); It; ++It)
+	for (TActorIterator<AOrb> It(World); It; ++It)
 	{
 		TargetOrb = *It;
 		break;

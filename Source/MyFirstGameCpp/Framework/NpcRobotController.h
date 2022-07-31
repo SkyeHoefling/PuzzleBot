@@ -6,8 +6,8 @@
 #include "AIController.h"
 #include "EngineUtils.h"
 #include "Kismet/KismetMathLibrary.h"
-#include "RobotCharacter.h"
-#include "OrbActor.h"
+#include "../Character/RobotCharacter.h"
+#include "../GameElements/Orb.h"
 #include "NpcRobotController.generated.h"
 
 /**
@@ -23,7 +23,7 @@ private:
 
 	FVector Destination;
 	FTimerHandle TimerHandle;
-	AOrbActor* TargetOrb;
+	AOrb* TargetOrb;
 protected:
 	virtual void BeginPlay() override;
 public:

@@ -4,7 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/GameModeBase.h"
-#include "RobotCharacter.h"
+#include "../Character/RobotCharacter.h"
 #include "RobotPlayerController.h"
 #include "ExploreGameMode.generated.h"
 
