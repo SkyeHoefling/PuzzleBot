@@ -62,6 +62,16 @@ void ADoor::BeginPlay()
 	if (Trigger)
 	{
 		Trigger->OnPlateStatusChanged.AddDynamic(this, &ADoor::OnPressurePlateStatusChanged);
+
+		DoorAnimationCurve = NewObject<UCurveFloat>();
+		DoorAnimationCurve->FloatCurve.AddKey(0.0f, 0.0f);
+		FKeyHandle KeyHandle = DoorAnimationCurve->FloatCurve.AddKey(0.5f, 1.0f);
+		DoorAnimationCurve->FloatCurve.SetKeyTangentMode(KeyHandle, ERichCurveTangentMode::RCTM_Auto, true);
+
+		FOnTimelineFloat FloatFunction{};
+		FloatFunction.BindUFunction(this, "DoorAnimation");
+
+		DoorAnimationTimeline.AddInterpFloat(DoorAnimationCurve, FloatFunction, TEXT("Door Animation Function"));
 	}
 }
 
@@ -70,13 +80,36 @@ void ADoor::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+	if (DoorAnimationTimeline.IsPlaying() || DoorAnimationTimeline.IsReversing())
+	{
+		DoorAnimationTimeline.TickTimeline(DeltaTime);
+	}
 }
 
 void ADoor::OnPressurePlateStatusChanged(bool IsActivated)
 {
+	// TODO - check if running??
 	if (IsActivated)
-		GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Green, FString::Printf(TEXT("PressurePlate: true")));
+	{
+		DoorAnimationTimeline.Play();
+	}
 	else
-		GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Green, FString::Printf(TEXT("PressurePlate: false")));
+	{
+		DoorAnimationTimeline.Reverse();
+	}
+}
+
+void ADoor::DoorAnimation(float Delta)
+{
+	if (DoorAnimationTimeline.IsPlaying())
+	{
+		DoorLeft->SetRelativeLocation(FVector(0.0f, Delta * -70.0f, 0.0f));
+		DoorRight->SetRelativeLocation(FVector(0.0f, Delta * -70.0f, 0.0f));
+	}
+	else if (DoorAnimationTimeline.IsReversing())
+	{
+		DoorLeft->SetRelativeLocation(FVector(0.0f, Delta * 70.0f, 0.0f));
+		DoorRight->SetRelativeLocation(FVector(0.0f, Delta * 70.0f, 0.0f));
+	}
 }
 

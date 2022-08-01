@@ -6,7 +6,6 @@
 #include "GameFramework/Actor.h"
 #include "Components/BoxComponent.h"
 #include "Components/TimelineComponent.h"
-#include "../Framework/InteractionComponent.h"
 #include "PressurePlate.generated.h"
 
 

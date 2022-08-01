@@ -50,5 +50,12 @@ private:
 	UFUNCTION()
 	void OnPressurePlateStatusChanged(bool IsActivated);
 
+	UPROPERTY(Transient)
+	UCurveFloat* DoorAnimationCurve;
 
+	UPROPERTY(Transient)
+	FTimeline DoorAnimationTimeline;
+
+	UFUNCTION()
+	void DoorAnimation(float Delta);
 };
