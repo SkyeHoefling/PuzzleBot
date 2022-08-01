@@ -4,6 +4,8 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
+#include "Components/BoxComponent.h"
+#include "Components/TimelineComponent.h"
 #include "PressurePlate.generated.h"
 
 UCLASS()
@@ -13,6 +15,9 @@ class MYFIRSTGAMECPP_API APressurePlate : public AActor
 
 	UPROPERTY(VisibleAnywhere)
 	UStaticMeshComponent* FrameMesh;
+
+	UPROPERTY(VisibleAnywhere)
+	UBoxComponent* BoxCollision;
 
 	UPROPERTY(VisibleAnywhere)
 	UStaticMeshComponent* PlatformMesh;
@@ -32,5 +37,22 @@ public:
 
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
+private:
+	int PawnsOnPlate = 0;
+
+	UPROPERTY(Transient) // If this isn't Transient it is sometimes NULL
+	UCurveFloat* FloatCurve;
+
+	UPROPERTY(Transient)
+	FTimeline PlateAnimation;
+
+	UFUNCTION()
+	void PlateAnimationInterp(float Value);
+
+	UFUNCTION()
+	void OnEnterPlate(class UPrimitiveComponent* OverlappedComp, class AActor* OtherActor, class UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
+
+	UFUNCTION()
+	void OnExitPlate(class UPrimitiveComponent* OverlappedComp, class AActor* OtherActor, class UPrimitiveComponent* OtherComp, int32 OtherBodyIndex);
 
 };
