@@ -8,8 +8,6 @@ void ANpcRobotController::BeginPlay()
 	Super::BeginPlay();
 
 	GetWorldTimerManager().SetTimer(TimerHandle, this, &ANpcRobotController::SearchAndDestroy, 3.0f, true);
-	Destination = FVector(-5320.0f, 5420.0f, 170.0f);
-	MoveToLocation(Destination);
 }
 
 void ANpcRobotController::SearchAndDestroy()
