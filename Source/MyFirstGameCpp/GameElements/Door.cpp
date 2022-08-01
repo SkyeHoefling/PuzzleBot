@@ -58,7 +58,11 @@ void ADoor::OnConstruction(const FTransform& Transform)
 void ADoor::BeginPlay()
 {
 	Super::BeginPlay();
-	
+
+	if (Trigger)
+	{
+		Trigger->OnPlateStatusChanged.AddDynamic(this, &ADoor::OnDoorOpen);
+	}
 }
 
 // Called every frame
@@ -66,5 +70,13 @@ void ADoor::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+}
+
+void ADoor::OnDoorOpen(bool IsActivated)
+{
+	if (IsActivated)
+		GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Green, FString::Printf(TEXT("PressurePlate: true")));
+	else
+		GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Green, FString::Printf(TEXT("PressurePlate: false")));
 }
 

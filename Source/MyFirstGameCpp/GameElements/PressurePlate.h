@@ -6,7 +6,9 @@
 #include "GameFramework/Actor.h"
 #include "Components/BoxComponent.h"
 #include "Components/TimelineComponent.h"
+#include "../Framework/InteractionComponent.h"
 #include "PressurePlate.generated.h"
+
 
 UCLASS()
 class MYFIRSTGAMECPP_API APressurePlate : public AActor
@@ -24,9 +26,15 @@ class MYFIRSTGAMECPP_API APressurePlate : public AActor
 
 	UPROPERTY(EditInstanceOnly);
 	FLinearColor FrameColor = FLinearColor(0.880208f, 0.1203f, 0.7335950f);
+	
 public:	
 	// Sets default values for this actor's properties
 	APressurePlate();
+
+	DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FPlateStatusChanged, bool, IsActivated);
+
+	UPROPERTY(BlueprintAssignable)
+	FPlateStatusChanged OnPlateStatusChanged;
 
 protected:
 	// Called when the game starts or when spawned
@@ -54,5 +62,4 @@ private:
 
 	UFUNCTION()
 	void OnExitPlate(class UPrimitiveComponent* OverlappedComp, class AActor* OtherActor, class UPrimitiveComponent* OtherComp, int32 OtherBodyIndex);
-
 };

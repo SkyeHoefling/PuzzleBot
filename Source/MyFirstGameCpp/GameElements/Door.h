@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
+#include "PressurePlate.h"
 #include "Door.generated.h"
 
 UCLASS()
@@ -32,6 +33,9 @@ public:
 
 	UPROPERTY(EditInstanceOnly);
 	FLinearColor DoorColor = FLinearColor(0.880208f, 0.1203f, 0.7335950f);
+
+	UPROPERTY(EditInstanceOnly);
+	APressurePlate* Trigger;
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
@@ -42,5 +46,9 @@ public:
 
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
+private:
+	UFUNCTION()
+	void OnDoorOpen(bool IsActivated);
+
 
 };
