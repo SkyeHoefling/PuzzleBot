@@ -48,6 +48,8 @@ ARobotCharacter::ARobotCharacter()
 	CharacterMovementComponent->bOrientRotationToMovement = true;
 	CharacterMovementComponent->MaxAcceleration = 400.0f;
 	CharacterMovementComponent->bUseControllerDesiredRotation = true;
+	CharacterMovementComponent->MaxStepHeight = 60.0f;
+	CharacterMovementComponent->SetWalkableFloorAngle(60.0f);
 }
 
 void ARobotCharacter::OnConstruction(const FTransform& Transform)
