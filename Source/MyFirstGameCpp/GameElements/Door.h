@@ -48,7 +48,7 @@ public:
 	virtual void Tick(float DeltaTime) override;
 private:
 	UFUNCTION()
-	void OnDoorOpen(bool IsActivated);
+	void OnPressurePlateStatusChanged(bool IsActivated);
 
 
 };

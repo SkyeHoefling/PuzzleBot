@@ -61,7 +61,7 @@ void ADoor::BeginPlay()
 
 	if (Trigger)
 	{
-		Trigger->OnPlateStatusChanged.AddDynamic(this, &ADoor::OnDoorOpen);
+		Trigger->OnPlateStatusChanged.AddDynamic(this, &ADoor::OnPressurePlateStatusChanged);
 	}
 }
 
@@ -72,7 +72,7 @@ void ADoor::Tick(float DeltaTime)
 
 }
 
-void ADoor::OnDoorOpen(bool IsActivated)
+void ADoor::OnPressurePlateStatusChanged(bool IsActivated)
 {
 	if (IsActivated)
 		GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Green, FString::Printf(TEXT("PressurePlate: true")));
