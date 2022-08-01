@@ -15,6 +15,9 @@ ARobotCharacterWithCamera::ARobotCharacterWithCamera()
 	SpringArm->SetupAttachment(RootComponent);
 	Camera->SetupAttachment(SpringArm, USpringArmComponent::SocketName);
 
+	// Disable collisions with camera's spring arm
+	SpringArm->bDoCollisionTest = false;
+
 	ActiveCamera = -1;
 	SetFixedRotationCamera();
 }
