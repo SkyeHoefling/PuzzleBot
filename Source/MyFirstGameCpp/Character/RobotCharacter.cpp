@@ -8,7 +8,7 @@ ARobotCharacter::ARobotCharacter()
 {
  	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
-	
+
 	VisualMesh = GetMesh();
 	
 	// Get mesh for the robotSkeletalMesh 
@@ -48,6 +48,12 @@ ARobotCharacter::ARobotCharacter()
 	CharacterMovementComponent->bOrientRotationToMovement = true;
 	CharacterMovementComponent->MaxAcceleration = 400.0f;
 	CharacterMovementComponent->bUseControllerDesiredRotation = true;
+}
+
+void ARobotCharacter::OnConstruction(const FTransform& Transform)
+{
+	UMaterialInstanceDynamic* BotMaterial = VisualMesh->CreateDynamicMaterialInstance(0);
+	BotMaterial->SetVectorParameterValue(FName("BotColor"), BotColor);
 }
 
 // Called when the game starts or when spawned
