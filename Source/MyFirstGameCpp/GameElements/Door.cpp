@@ -40,7 +40,18 @@ ADoor::ADoor()
 	AnchorDoorLeft->SetRelativeLocation(FVector(0.0f, 330.0f, 0.0f));
 
 	AnchorDoorRight->SetRelativeLocation(FVector(0.0f, 170.0f, 0.0f));
+}
 
+void ADoor::OnConstruction(const FTransform& Transform)
+{
+	UMaterialInstanceDynamic* WallMaterial = WallMesh->CreateDynamicMaterialInstance(0);
+	WallMaterial->SetVectorParameterValue(FName("PlasticColor"), DoorColor);
+
+	UMaterialInstanceDynamic* DoorLeftMaterial = DoorLeft->CreateDynamicMaterialInstance(0);
+	DoorLeftMaterial->SetVectorParameterValue(FName("PlasticColor"), DoorColor);
+
+	UMaterialInstanceDynamic* DoorRightMaterial = DoorRight->CreateDynamicMaterialInstance(0);
+	DoorRightMaterial->SetVectorParameterValue(FName("PlasticColor"), DoorColor);
 }
 
 // Called when the game starts or when spawned

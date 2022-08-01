@@ -30,11 +30,16 @@ public:
 	UPROPERTY(VisibleAnywhere)
 	UStaticMeshComponent* DoorRight;
 
+	UPROPERTY(EditInstanceOnly);
+	FLinearColor DoorColor = FLinearColor(0.880208f, 0.1203f, 0.7335950f);
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
 public:	
+	// Called when Actor is being constructed
+	virtual void OnConstruction(const FTransform& Transform) override;
+
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
