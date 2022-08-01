@@ -72,6 +72,8 @@ void ADoor::BeginPlay()
 		FloatFunction.BindUFunction(this, "DoorAnimation");
 
 		DoorAnimationTimeline.AddInterpFloat(DoorAnimationCurve, FloatFunction, TEXT("Door Animation Function"));
+
+		PlayerCameraManager = GetWorld()->GetFirstPlayerController()->PlayerCameraManager;
 	}
 }
 
@@ -88,13 +90,15 @@ void ADoor::Tick(float DeltaTime)
 
 void ADoor::OnPressurePlateStatusChanged(bool IsActivated)
 {
-	// TODO - check if running??
+	// WE ARE REALLY CLOSE TO GETTING THIS TO WORK
 	if (IsActivated)
 	{
 		DoorAnimationTimeline.Play();
+		PlayerCameraManager->PlayWorldCameraShake(GetWorld(), CameraShake, GetActorLocation(), 0.0f, 10000.0f, 1.0f);
 	}
 	else
 	{
+		PlayerCameraManager->PlayWorldCameraShake(GetWorld(), CameraShake, GetActorLocation(), 0.0f, 10000.0f, 1.0f);
 		DoorAnimationTimeline.Reverse();
 	}
 }

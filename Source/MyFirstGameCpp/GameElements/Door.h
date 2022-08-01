@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
 #include "PressurePlate.h"
+#include "DoorMoveCameraShake.h"
 #include "Door.generated.h"
 
 UCLASS()
@@ -58,4 +59,9 @@ private:
 
 	UFUNCTION()
 	void DoorAnimation(float Delta);
+
+	TObjectPtr<APlayerCameraManager> PlayerCameraManager;
+
+	UPROPERTY(EditAnywhere)
+	TSubclassOf<UCameraShakeBase> CameraShake;
 };
