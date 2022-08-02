@@ -17,15 +17,15 @@ UCLASS()
 class MYFIRSTGAMECPP_API ANpcRobotController : public AAIController
 {
 	GENERATED_BODY()
-		
+
+public:
+	virtual void OnMoveCompleted(FAIRequestID RequestID, const FPathFollowingResult& Result) override;
+protected:
+	virtual void BeginPlay() override;
 private:
 	void SearchAndDestroy();
 
 	FVector Destination;
 	FTimerHandle TimerHandle;
 	AOrb* TargetOrb;
-protected:
-	virtual void BeginPlay() override;
-public:
-	virtual void OnMoveCompleted(FAIRequestID RequestID, const FPathFollowingResult& Result) override;
 };
