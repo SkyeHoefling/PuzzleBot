@@ -5,7 +5,7 @@
 #include "CoreMinimal.h"
 #include "AIController.h"
 #include "EngineUtils.h"
-#include "Kismet/KismetMathLibrary.h"
+#include "GameFramework/Volume.h"
 #include "../Character/RobotCharacter.h"
 #include "../GameElements/Orb.h"
 #include "NpcRobotController.generated.h"
@@ -20,6 +20,8 @@ class MYFIRSTGAMECPP_API ANpcRobotController : public AAIController
 
 public:
 	virtual void OnMoveCompleted(FAIRequestID RequestID, const FPathFollowingResult& Result) override;
+
+	
 protected:
 	virtual void BeginPlay() override;
 private:
@@ -28,4 +30,5 @@ private:
 	FVector Destination;
 	FTimerHandle TimerHandle;
 	AOrb* TargetOrb;
+	AVolume* NavMesh;
 };

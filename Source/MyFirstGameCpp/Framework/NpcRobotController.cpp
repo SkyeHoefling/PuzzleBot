@@ -6,22 +6,37 @@
 void ANpcRobotController::BeginPlay()
  {
 	Super::BeginPlay();
-
 	GetWorldTimerManager().SetTimer(TimerHandle, this, &ANpcRobotController::SearchAndDestroy, 3.0f, true);
+
+	FVector Location = GetPawn()->GetActorLocation();
+	for (TActorIterator<AVolume> It(GetWorld()); It; ++It)
+	{
+		AVolume* CurrentVolume = *It;
+
+		FBox3d Box = CurrentVolume->GetBounds().GetBox();
+		if (Box.IsInside(GetPawn()->GetActorLocation()))
+		{
+			NavMesh = CurrentVolume;
+			break;
+		}
+	}
 }
 
 void ANpcRobotController::SearchAndDestroy()
 {
-	if (TargetOrb)
+	if (TargetOrb || !NavMesh)
 		return;
 
-	UWorld* World = GetWorld();
 	TargetOrb = NULL;
-	
-	for (TActorIterator<AOrb> It(World); It; ++It)
+
+	FBox3d NavMeshBox = NavMesh->GetBounds().GetBox();
+	for (TActorIterator<AOrb> It(GetWorld()); It; ++It)
 	{
-		TargetOrb = *It;
-		break;
+		if (NavMeshBox.IsInside((*It)->GetActorLocation()))
+		{
+			TargetOrb = *It;
+			break;
+		}
 	}
 
 	if (!TargetOrb)
