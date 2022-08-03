@@ -12,7 +12,7 @@ https://user-images.githubusercontent.com/17751436/182261642-098b112b-fd64-4449-
 https://user-images.githubusercontent.com/17751436/182261647-ff299432-30e1-47b2-8f8e-083543d84b09.mp4
 
 ## Depth Test (Outline Behind Walls)
-https://user-images.githubusercontent.com/17751436/182616069-b759f800-dd8a-4597-90eb-315a922a44aa.mp4
+https://user-images.githubusercontent.com/17751436/182626567-c2e45f52-f529-4345-b957-3b506f85b003.mp4
 
 # Content and Assets
 This repository contains configuration files and source code. It does not contain all the assets as some files are very large. There is also distribution and licensing concerns, if you want instructions on how to get all the assets please see the Compiling section below.
