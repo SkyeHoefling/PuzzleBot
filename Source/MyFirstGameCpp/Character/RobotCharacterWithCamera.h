@@ -4,6 +4,8 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
+#include "Components/SceneCaptureComponent2D.h"
+#include "Engine/TextureRenderTarget2D.h"
 #include "RobotCharacter.h"
 #include "RobotCharacterWithCamera.generated.h"
 
@@ -21,10 +23,18 @@ public:
 
 	UPROPERTY(VisibleAnywhere)
 	UCameraComponent* Camera;
+
+	UPROPERTY(VisibleAnywhere)
+	UCameraComponent* MiniMapCamera;
+
+	UPROPERTY(VisibleAnywhere)
+	USceneCaptureComponent2D* MiniMapCapture;
 private:
 	void SetOverTheShoulderCamera();
 	void SetFixedRotationCamera();
 	void SetFixedZoneCamera();
+
+	void SetupMiniMap();
 
 	int ActiveCamera; // 0 = OverTheshoulder, 1 = FixedRotation, 2 = FixedZone
 protected:

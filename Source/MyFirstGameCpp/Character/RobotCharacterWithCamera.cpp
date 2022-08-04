@@ -11,15 +11,20 @@ ARobotCharacterWithCamera::ARobotCharacterWithCamera()
 
 	SpringArm = CreateDefaultSubobject<USpringArmComponent>("Spring Arm");
 	Camera = CreateDefaultSubobject<UCameraComponent>("Camera");
+	MiniMapCamera = CreateDefaultSubobject<UCameraComponent>("Mini Map");
+	MiniMapCapture = CreateDefaultSubobject<USceneCaptureComponent2D>("Mini Map Capture");
 
 	SpringArm->SetupAttachment(RootComponent);
 	Camera->SetupAttachment(SpringArm, USpringArmComponent::SocketName);
+	MiniMapCamera->SetupAttachment(RootComponent);
+	MiniMapCapture->SetupAttachment(MiniMapCamera);
 
 	// Disable collisions with camera's spring arm
 	SpringArm->bDoCollisionTest = false;
 
 	ActiveCamera = -1;
 	SetFixedRotationCamera();
+	SetupMiniMap();
 }
 
 // Called when the game starts or when spawned
@@ -127,4 +132,17 @@ void ARobotCharacterWithCamera::SetFixedZoneCamera()
 		return;
 
 	ActiveCamera = 2;
+}
+
+void ARobotCharacterWithCamera::SetupMiniMap()
+{
+	MiniMapCamera->SetUsingAbsoluteRotation(true);
+	MiniMapCamera->SetRelativeLocation(FVector(0.0f, 0.0f, 1250.0f));
+	MiniMapCamera->SetWorldRotation(FRotator(-90.0f, 0.0f, 0.0f));
+
+	static ConstructorHelpers::FObjectFinder<UTextureRenderTarget2D> MiniMapTexture(TEXT("TextureRenderTarget2D'/Game/Hud/MiniMap_Texture.MiniMap_Texture'"));
+	if (MiniMapTexture.Succeeded())
+	{
+		MiniMapCapture->TextureTarget = MiniMapTexture.Object;
+	}
 }
