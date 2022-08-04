@@ -50,6 +50,8 @@ ARobotCharacter::ARobotCharacter()
 	CharacterMovementComponent->bUseControllerDesiredRotation = true;
 	CharacterMovementComponent->MaxStepHeight = 60.0f;
 	CharacterMovementComponent->SetWalkableFloorAngle(60.0f);
+
+	VisualMesh->bRenderCustomDepth = true;
 }
 
 void ARobotCharacter::OnConstruction(const FTransform& Transform)
