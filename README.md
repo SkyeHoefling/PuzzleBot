@@ -17,6 +17,9 @@ https://user-images.githubusercontent.com/17751436/182626567-c2e45f52-f529-4345-
 ## Mini Map
 https://user-images.githubusercontent.com/17751436/182747601-6d0be5be-4eaf-44b6-b7a5-bed23f5acf13.mp4
 
+## Mini Map Event Overlay
+https://user-images.githubusercontent.com/17751436/182762131-c6bd9d0b-a37a-46b4-a96e-964e5d2aef8c.mp4
+
 # Content and Assets
 This repository contains configuration files and source code. It does not contain all the assets as some files are very large. There is also distribution and licensing concerns, if you want instructions on how to get all the assets please see the Compiling section below.
 
