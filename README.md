@@ -14,6 +14,9 @@ https://user-images.githubusercontent.com/17751436/182261647-ff299432-30e1-47b2-
 ## Depth Test (Outline Behind Walls)
 https://user-images.githubusercontent.com/17751436/182626567-c2e45f52-f529-4345-b957-3b506f85b003.mp4
 
+## Mini Map
+https://user-images.githubusercontent.com/17751436/182747601-6d0be5be-4eaf-44b6-b7a5-bed23f5acf13.mp4
+
 # Content and Assets
 This repository contains configuration files and source code. It does not contain all the assets as some files are very large. There is also distribution and licensing concerns, if you want instructions on how to get all the assets please see the Compiling section below.
 
