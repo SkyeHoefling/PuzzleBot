@@ -4,6 +4,8 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
+#include "Blueprint/UserWidget.h"
+#include "../Maps/GameLevel.h"
 #include "PressurePlate.h"
 #include "DoorMoveCameraShake.h"
 #include "Door.generated.h"
@@ -37,6 +39,9 @@ public:
 
 	UPROPERTY(EditInstanceOnly);
 	APressurePlate* Trigger;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = HeadsUpDisplay);
+	UHudUserWidget* HeadsUpDisplay;
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;

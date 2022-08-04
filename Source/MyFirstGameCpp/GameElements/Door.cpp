@@ -93,6 +93,12 @@ void ADoor::OnPressurePlateStatusChanged(bool IsActivated)
 	// WE ARE REALLY CLOSE TO GETTING THIS TO WORK
 	if (IsActivated)
 	{
+		if (HeadsUpDisplay)
+		{
+			HeadsUpDisplay->MiniMapOverlayEvent();
+			// TODO - display effect in 5 seconds
+		}
+
 		DoorAnimationTimeline.Play();
 		PlayerCameraManager->PlayWorldCameraShake(GetWorld(), CameraShake, GetActorLocation(), 0.0f, 10000.0f, 1.0f);
 	}
