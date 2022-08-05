@@ -140,7 +140,7 @@ void ARobotCharacterWithCamera::SetupMiniMap()
 	MiniMapCamera->SetRelativeLocation(FVector(0.0f, 0.0f, 1250.0f));
 	MiniMapCamera->SetWorldRotation(FRotator(-90.0f, 0.0f, 0.0f));
 
-	static ConstructorHelpers::FObjectFinder<UTextureRenderTarget2D> MiniMapTexture(TEXT("TextureRenderTarget2D'/Game/Hud/MiniMap_Texture.MiniMap_Texture'"));
+	static ConstructorHelpers::FObjectFinder<UTextureRenderTarget2D> MiniMapTexture(TEXT("TextureRenderTarget2D'/Game/Hud/MiniMap/MiniMap_Texture.MiniMap_Texture'"));
 	if (MiniMapTexture.Succeeded())
 	{
 		MiniMapCapture->TextureTarget = MiniMapTexture.Object;
