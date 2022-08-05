@@ -16,10 +16,10 @@ class MYFIRSTGAMECPP_API UHudUserWidget : public UUserWidget
 	
 public:
 	UFUNCTION(BlueprintImplementableEvent, meta = (DisplayName = "MiniMapOverlayEvent"))
-	void MiniMapOverlayEvent(UTexture* LiveEventTexture);
+	void MiniMapOverlayEvent(UMaterial* NewLiveEventMaterial);
 
 	UFUNCTION(BlueprintCallable)
-	void SetLiveEventTexture(UTexture* Texture);
+	void SetLiveEventTexture(UMaterial* Material);
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = HeadsUpDisplay);
 	UMaterial* LiveEventMaterial;
