@@ -95,8 +95,7 @@ void ADoor::OnPressurePlateStatusChanged(bool IsActivated)
 	{
 		if (HeadsUpDisplay)
 		{
-			HeadsUpDisplay->MiniMapOverlayEvent();
-			// TODO - display effect in 5 seconds
+			HeadsUpDisplay->MiniMapOverlayEvent(LiveEventTexture);
 		}
 
 		DoorAnimationTimeline.Play();

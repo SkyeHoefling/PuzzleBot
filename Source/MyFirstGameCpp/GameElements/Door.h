@@ -5,6 +5,9 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
 #include "Blueprint/UserWidget.h"
+#include "Camera/CameraActor.h"
+#include "Components/SceneCaptureComponent2D.h"
+#include "Engine/TextureRenderTarget2D.h"
 #include "../Maps/GameLevel.h"
 #include "PressurePlate.h"
 #include "DoorMoveCameraShake.h"
@@ -42,6 +45,9 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = HeadsUpDisplay);
 	UHudUserWidget* HeadsUpDisplay;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = HeadsUpDisplay);
+	TObjectPtr<UTextureRenderTarget2D> LiveEventTexture;
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
@@ -69,4 +75,6 @@ private:
 
 	UPROPERTY(EditAnywhere)
 	TSubclassOf<UCameraShakeBase> CameraShake;
+
+	USceneCaptureComponent2D* FindSceneCaptureComponent2D();
 };
