@@ -12,7 +12,7 @@
  * 
  */
 UCLASS()
-class MYFIRSTGAMECPP_API ARobotPlayerController : public APlayerController
+class PUZZLEBOT_API ARobotPlayerController : public APlayerController
 {
 	GENERATED_BODY()
 	

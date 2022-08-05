@@ -10,7 +10,7 @@
  * 
  */
 UCLASS()
-class MYFIRSTGAMECPP_API UDoorMoveCameraShake : public UMatineeCameraShake
+class PUZZLEBOT_API UDoorMoveCameraShake : public UMatineeCameraShake
 {
 	GENERATED_BODY()
 

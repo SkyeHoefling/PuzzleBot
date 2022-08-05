@@ -4,13 +4,13 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/GameModeBase.h"
-#include "MyFirstGameCppGameModeBase.generated.h"
+#include "PuzzleBotGameModeBase.generated.h"
 
 /**
  * 
  */
 UCLASS()
-class MYFIRSTGAMECPP_API AMyFirstGameCppGameModeBase : public AGameModeBase
+class PUZZLEBOT_API APuzzleBotGameModeBase : public AGameModeBase
 {
 	GENERATED_BODY()
 	

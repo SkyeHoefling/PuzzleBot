@@ -14,7 +14,7 @@
  * 
  */
 UCLASS()
-class MYFIRSTGAMECPP_API ANpcRobotController : public AAIController
+class PUZZLEBOT_API ANpcRobotController : public AAIController
 {
 	GENERATED_BODY()
 

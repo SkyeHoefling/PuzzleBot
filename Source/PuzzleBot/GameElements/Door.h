@@ -12,7 +12,7 @@
 #include "Door.generated.h"
 
 UCLASS()
-class MYFIRSTGAMECPP_API ADoor : public AActor
+class PUZZLEBOT_API ADoor : public AActor
 {
 	GENERATED_BODY()
 	

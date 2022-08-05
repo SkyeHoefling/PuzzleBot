@@ -12,7 +12,7 @@
 #include "RobotCharacter.generated.h"
 
 UCLASS()
-class MYFIRSTGAMECPP_API ARobotCharacter : public ACharacter
+class PUZZLEBOT_API ARobotCharacter : public ACharacter
 {
 	GENERATED_BODY()
 

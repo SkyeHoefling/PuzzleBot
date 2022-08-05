@@ -10,7 +10,7 @@
  * 
  */
 UCLASS()
-class MYFIRSTGAMECPP_API UHudUserWidget : public UUserWidget
+class PUZZLEBOT_API UHudUserWidget : public UUserWidget
 {
 	GENERATED_BODY()
 	

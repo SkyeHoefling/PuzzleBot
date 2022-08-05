@@ -7,7 +7,7 @@
 #include "Crate.generated.h"
 
 UCLASS()
-class MYFIRSTGAMECPP_API ACrate : public AActor
+class PUZZLEBOT_API ACrate : public AActor
 {
 	GENERATED_BODY()
 	

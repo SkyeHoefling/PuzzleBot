@@ -11,7 +11,7 @@
  * 
  */
 UCLASS()
-class MYFIRSTGAMECPP_API AGameLevel : public ALevelScriptActor
+class PUZZLEBOT_API AGameLevel : public ALevelScriptActor
 {
 	GENERATED_BODY()
 public:

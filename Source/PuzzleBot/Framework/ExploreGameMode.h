@@ -12,7 +12,7 @@
  * 
  */
 UCLASS()
-class MYFIRSTGAMECPP_API AExploreGameMode : public AGameModeBase
+class PUZZLEBOT_API AExploreGameMode : public AGameModeBase
 {
 	GENERATED_BODY()
 	

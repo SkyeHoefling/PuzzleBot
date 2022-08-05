@@ -10,7 +10,7 @@
 
 
 UCLASS()
-class MYFIRSTGAMECPP_API APressurePlate : public AActor
+class PUZZLEBOT_API APressurePlate : public AActor
 {
 	GENERATED_BODY()
 

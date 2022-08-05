@@ -10,7 +10,7 @@
  * 
  */
 UCLASS()
-class MYFIRSTGAMECPP_API UBotAnimationInstance : public UAnimInstance
+class PUZZLEBOT_API UBotAnimationInstance : public UAnimInstance
 {
 	GENERATED_BODY()
 

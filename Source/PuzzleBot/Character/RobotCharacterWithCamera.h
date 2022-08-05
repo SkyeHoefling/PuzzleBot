@@ -10,7 +10,7 @@
 #include "RobotCharacterWithCamera.generated.h"
 
 UCLASS()
-class MYFIRSTGAMECPP_API ARobotCharacterWithCamera : public ARobotCharacter
+class PUZZLEBOT_API ARobotCharacterWithCamera : public ARobotCharacter
 {
 	GENERATED_BODY()
 

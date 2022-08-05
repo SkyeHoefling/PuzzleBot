@@ -3,12 +3,12 @@
 using UnrealBuildTool;
 using System.Collections.Generic;
 
-public class MyFirstGameCppTarget : TargetRules
+public class PuzzleBotTarget : TargetRules
 {
-	public MyFirstGameCppTarget( TargetInfo Target) : base(Target)
+	public PuzzleBotTarget( TargetInfo Target) : base(Target)
 	{
 		Type = TargetType.Game;
 		DefaultBuildSettings = BuildSettingsVersion.V2;
-		ExtraModuleNames.AddRange( new string[] { "MyFirstGameCpp" } );
+		ExtraModuleNames.AddRange( new string[] { "PuzzleBot" } );
 	}
 }

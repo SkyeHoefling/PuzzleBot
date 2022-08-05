@@ -2,9 +2,9 @@
 
 using UnrealBuildTool;
 
-public class MyFirstGameCpp : ModuleRules
+public class PuzzleBot : ModuleRules
 {
-	public MyFirstGameCpp(ReadOnlyTargetRules Target) : base(Target)
+	public PuzzleBot(ReadOnlyTargetRules Target) : base(Target)
 	{
 		PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
 	

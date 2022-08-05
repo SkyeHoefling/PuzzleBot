@@ -7,7 +7,7 @@
 #include "Orb.generated.h"
 
 UCLASS()
-class MYFIRSTGAMECPP_API AOrb : public AActor
+class PUZZLEBOT_API AOrb : public AActor
 {
 	GENERATED_BODY()
 	
