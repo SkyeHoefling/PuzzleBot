@@ -17,10 +17,12 @@ AOrb::AOrb()
 		StaticMesh->SetStaticMesh(OrbVisualAsset.Object);
 	}
 
+
 	// prevent physical collisions with pawns and camera
 	StaticMesh->SetGenerateOverlapEvents(true);
 	StaticMesh->SetCollisionResponseToChannel(ECollisionChannel::ECC_Pawn, ECollisionResponse::ECR_Overlap);
 	StaticMesh->SetCollisionResponseToChannel(ECollisionChannel::ECC_Camera, ECollisionResponse::ECR_Overlap);
+	StaticMesh->SetCanEverAffectNavigation(false); // Prevents nav tree from getting stuck (ignores orb for nav paths)
 
 	StaticMesh->OnComponentBeginOverlap.AddDynamic(this, &AOrb::OnOrbCollected);
 }
@@ -40,7 +42,7 @@ void AOrb::Tick(float DeltaTime)
 void AOrb::OnOrbCollected(class UPrimitiveComponent* OverlappedComp, class AActor* OtherActor, class UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
 	APawn* Pawn = Cast<APawn>(OtherActor);
-	if (!Pawn || Pawn->IsPlayerControlled())
+	if (!Pawn || Pawn->IsPlayerControlled() || Pawn->IsFollowingAPath())
 		return;
 
 	Destroy();
