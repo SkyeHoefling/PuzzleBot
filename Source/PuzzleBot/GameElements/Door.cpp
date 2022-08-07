@@ -59,9 +59,15 @@ void ADoor::BeginPlay()
 {
 	Super::BeginPlay();
 
-	if (Trigger)
+	if (Triggers.Num() > 0)
 	{
-		Trigger->OnPlateStatusChanged.AddDynamic(this, &ADoor::OnPressurePlateStatusChanged);
+		for (APressurePlate* CurrentTrigger : Triggers)
+		{
+			if (!CurrentTrigger)
+				continue;
+
+			CurrentTrigger->OnPlateStatusChanged.AddDynamic(this, &ADoor::OnPressurePlateStatusChanged);
+		}
 
 		DoorAnimationCurve = NewObject<UCurveFloat>();
 		DoorAnimationCurve->FloatCurve.AddKey(0.0f, 0.0f);

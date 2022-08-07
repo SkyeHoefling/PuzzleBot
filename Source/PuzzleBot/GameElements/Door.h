@@ -39,7 +39,7 @@ public:
 	FLinearColor DoorColor = FLinearColor(0.880208f, 0.1203f, 0.7335950f);
 
 	UPROPERTY(EditInstanceOnly);
-	APressurePlate* Trigger;
+	TArray<APressurePlate*> Triggers;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = HeadsUpDisplay);
 	UHudUserWidget* HeadsUpDisplay;
