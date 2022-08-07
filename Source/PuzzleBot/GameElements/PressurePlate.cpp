@@ -111,3 +111,8 @@ void APressurePlate::OnExitPlate(
 		PlateAnimation.Reverse();
 	}
 }
+
+bool APressurePlate::IsActivated()
+{
+	return PawnsOnPlate > 0;
+}

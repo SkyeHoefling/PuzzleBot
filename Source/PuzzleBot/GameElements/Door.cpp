@@ -108,6 +108,13 @@ void ADoor::OnPressurePlateStatusChanged(bool IsActivated)
 	}
 	else
 	{
+		// check if any other door triggers are activated. If so ignore state change
+		for (APressurePlate* Current : Triggers)
+		{
+			if (Current->IsActivated())
+				return;
+		}
+
 		PlayerCameraManager->PlayWorldCameraShake(GetWorld(), CameraShake, GetActorLocation(), 0.0f, 10000.0f, 1.0f);
 		DoorAnimationTimeline.Reverse();
 	}

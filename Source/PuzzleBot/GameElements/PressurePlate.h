@@ -35,6 +35,8 @@ public:
 	UPROPERTY(BlueprintAssignable)
 	FPlateStatusChanged OnPlateStatusChanged;
 
+	bool IsActivated();
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
