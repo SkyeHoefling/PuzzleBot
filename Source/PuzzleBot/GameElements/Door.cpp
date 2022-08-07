@@ -96,7 +96,6 @@ void ADoor::Tick(float DeltaTime)
 
 void ADoor::OnPressurePlateStatusChanged(bool IsActivated)
 {
-	// WE ARE REALLY CLOSE TO GETTING THIS TO WORK
 	if (IsActivated)
 	{
 		if (HeadsUpDisplay)
