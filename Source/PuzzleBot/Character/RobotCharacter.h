@@ -26,7 +26,8 @@ public:
 	UPROPERTY(EditInstanceOnly);
 	FLinearColor BotColor = FLinearColor(0.880208f, 0.1203f, 0.7335950f);
 
-	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = NavMesh);
+	TArray<AVolume*> NavMeshes;
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
@@ -39,4 +40,6 @@ public:
 
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
+
+	
 };

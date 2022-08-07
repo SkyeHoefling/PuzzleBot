@@ -6,35 +6,43 @@
 void ANpcRobotController::BeginPlay()
  {
 	Super::BeginPlay();
+
 	GetWorldTimerManager().SetTimer(TimerHandle, this, &ANpcRobotController::SearchAndDestroy, 3.0f, true);
 
-	FVector Location = GetPawn()->GetActorLocation();
-	for (TActorIterator<AVolume> It(GetWorld()); It; ++It)
+	Robot = GetPawn<ARobotCharacter>();
+	if (Robot && Robot->NavMeshes.Num() <= 0)
 	{
-		AVolume* CurrentVolume = *It;
-
-		FBox3d Box = CurrentVolume->GetBounds().GetBox();
-		if (Box.IsInside(GetPawn()->GetActorLocation()))
+		FVector Location = GetPawn()->GetActorLocation();
+		for (TActorIterator<AVolume> It(GetWorld()); It; ++It)
 		{
-			NavMesh = CurrentVolume;
-			break;
+			AVolume* CurrentVolume = *It;
+
+			FBox3d Box = CurrentVolume->GetBounds().GetBox();
+			if (Box.IsInside(Robot->GetActorLocation()))
+			{
+				Robot->NavMeshes.Add(CurrentVolume);
+				break;
+			}
 		}
 	}
 }
 
 void ANpcRobotController::SearchAndDestroy()
 {
-	if (TargetOrb || !NavMesh)
+	if (TargetOrb || Robot->NavMeshes.Num() <= 0)
 		return;
 
 	TargetOrb = NULL;
 
-	FBox3d NavMeshBox = NavMesh->GetBounds().GetBox();
 	for (TActorIterator<AOrb> It(GetWorld()); It; ++It)
 	{
-		if (NavMeshBox.IsInside((*It)->GetActorLocation()))
+		AOrb* CurrentOrb = *It;
+		if (!CurrentOrb)
+			continue;
+
+		if (IsInsideNavMesh((*It)->GetActorLocation()))
 		{
-			TargetOrb = *It;
+			TargetOrb = CurrentOrb;
 			break;
 		}
 	}
@@ -43,6 +51,18 @@ void ANpcRobotController::SearchAndDestroy()
 		return;
 
 	MoveToActor(TargetOrb);
+}
+
+bool ANpcRobotController::IsInsideNavMesh(FVector ActorLocation)
+{
+	for (AVolume* CurrentVolume : Robot->NavMeshes)
+	{
+		FBox3d NavMeshBox = CurrentVolume->GetBounds().GetBox();
+		if (NavMeshBox.IsInside(ActorLocation))
+			return true;
+	}
+
+	return false;
 }
 
 void ANpcRobotController::OnMoveCompleted(FAIRequestID RequestID, const FPathFollowingResult& Result)

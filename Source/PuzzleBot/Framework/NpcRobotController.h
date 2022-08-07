@@ -6,6 +6,7 @@
 #include "AIController.h"
 #include "EngineUtils.h"
 #include "GameFramework/Volume.h"
+#include "BehaviorTree/BlackboardComponent.h"
 #include "../Character/RobotCharacter.h"
 #include "../GameElements/Orb.h"
 #include "NpcRobotController.generated.h"
@@ -20,15 +21,16 @@ class PUZZLEBOT_API ANpcRobotController : public AAIController
 
 public:
 	virtual void OnMoveCompleted(FAIRequestID RequestID, const FPathFollowingResult& Result) override;
-
-	
 protected:
 	virtual void BeginPlay() override;
 private:
 	void SearchAndDestroy();
+	bool IsInsideNavMesh(FVector ActorLocation);
+
+	UPROPERTY(Transient);
+	ARobotCharacter* Robot;
 
 	FVector Destination;
 	FTimerHandle TimerHandle;
 	AOrb* TargetOrb;
-	AVolume* NavMesh;
 };
