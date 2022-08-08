@@ -104,7 +104,11 @@ void ADoor::OnPressurePlateStatusChanged(bool IsActivated)
 		}
 
 		DoorAnimationTimeline.Play();
-		PlayerCameraManager->PlayWorldCameraShake(GetWorld(), CameraShake, GetActorLocation(), 0.0f, 10000.0f, 1.0f);
+
+		if (CameraShake)
+		{
+			PlayerCameraManager->PlayWorldCameraShake(GetWorld(), CameraShake, GetActorLocation(), 0.0f, 10000.0f, 1.0f);
+		}
 	}
 	else
 	{
@@ -115,7 +119,11 @@ void ADoor::OnPressurePlateStatusChanged(bool IsActivated)
 				return;
 		}
 
-		PlayerCameraManager->PlayWorldCameraShake(GetWorld(), CameraShake, GetActorLocation(), 0.0f, 10000.0f, 1.0f);
+		if (CameraShake)
+		{
+			PlayerCameraManager->PlayWorldCameraShake(GetWorld(), CameraShake, GetActorLocation(), 0.0f, 10000.0f, 1.0f);
+		}
+
 		DoorAnimationTimeline.Reverse();
 	}
 }
