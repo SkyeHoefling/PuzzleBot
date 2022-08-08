@@ -73,9 +73,6 @@ private:
 	UFUNCTION()
 	void OnDoorAnimationProgress(float Delta);
 
-	UFUNCTION()
-	void OnDoorAnimationFinished();
-
 	TObjectPtr<APlayerCameraManager> PlayerCameraManager;
 
 	UPROPERTY(EditAnywhere)

@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "Blueprint/UserWidget.h"
+#include "../GameElements/EventTriggers/MiniMapEventCamera.h"
 #include "HudUserWidget.generated.h"
 
 /**
@@ -16,7 +17,7 @@ class PUZZLEBOT_API UHudUserWidget : public UUserWidget
 	
 public:
 	UFUNCTION(BlueprintImplementableEvent, meta = (DisplayName = "MiniMapOverlayEvent"))
-	void MiniMapOverlayEvent(UMaterial* NewLiveEventMaterial);
+	void MiniMapOverlayEvent(UMaterial* NewLiveEventMaterial, AMiniMapEventCamera* MiniMapEventCamera);
 
 	UFUNCTION(BlueprintCallable)
 	void SetLiveEventTexture(UMaterial* Material);

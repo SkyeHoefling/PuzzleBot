@@ -76,12 +76,7 @@ void ADoor::BeginPlay()
 
 		FOnTimelineFloat OnDoorAnimationProgressFunction{};
 		OnDoorAnimationProgressFunction.BindUFunction(this, "OnDoorAnimationProgress");
-
-		FOnTimelineEventStatic OnDoorAnimationFinishedCallback{};
-		OnDoorAnimationFinishedCallback.BindUFunction(this, "OnDoorAnimationFinished");
-
 		DoorAnimationTimeline.AddInterpFloat(DoorAnimationCurve, OnDoorAnimationProgressFunction, TEXT("Door Animation Function"));
-		DoorAnimationTimeline.SetTimelineFinishedFunc(OnDoorAnimationFinishedCallback);
 
 		PlayerCameraManager = GetWorld()->GetFirstPlayerController()->PlayerCameraManager;
 	}
@@ -105,7 +100,7 @@ void ADoor::OnPressurePlateStatusChanged(bool IsActivated)
 		if (HeadsUpDisplay && MiniMapEventCamera)
 		{
 			MiniMapEventCamera->ToggleCamera(true);
-			HeadsUpDisplay->MiniMapOverlayEvent(LiveEventMaterial);
+			HeadsUpDisplay->MiniMapOverlayEvent(LiveEventMaterial, MiniMapEventCamera);
 		}
 
 		DoorAnimationTimeline.Play();
@@ -146,15 +141,3 @@ void ADoor::OnDoorAnimationProgress(float Delta)
 		DoorRight->SetRelativeLocation(FVector(0.0f, Delta * 70.0f, 0.0f));
 	}
 }
-
-void ADoor::OnDoorAnimationFinished()
-{
-	if (MiniMapEventCamera)
-	{
-		// Stop rendering camera to minimap texture since it is an expensive operation
-		// In limited testing if this is not doen after 4-7 2D renderings, the FPS will
-		// drop from 60 fps to 15 fps.
-		MiniMapEventCamera->ToggleCamera(false);
-	}
-}
-

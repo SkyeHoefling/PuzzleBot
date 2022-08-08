@@ -21,5 +21,6 @@ public:
 	UPROPERTY(VisibleAnywhere);
 	USceneCaptureComponent2D* SceneCaptureComponent2D;
 	
+	UFUNCTION(BlueprintCallable)
 	void ToggleCamera(bool isCameraCapturingFrames);
 };
