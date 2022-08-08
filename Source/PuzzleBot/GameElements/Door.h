@@ -7,7 +7,7 @@
 #include "Blueprint/UserWidget.h"
 #include "Camera/CameraActor.h"
 #include "../Maps/GameLevel.h"
-#include "PressurePlate.h"
+#include "EventTriggers/PressurePlate.h"
 #include "DoorMoveCameraShake.h"
 #include "Door.generated.h"
 
