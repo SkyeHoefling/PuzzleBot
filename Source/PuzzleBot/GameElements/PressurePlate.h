@@ -14,6 +14,7 @@ class PUZZLEBOT_API APressurePlate : public AActor
 {
 	GENERATED_BODY()
 
+public:
 	UPROPERTY(VisibleAnywhere)
 	UStaticMeshComponent* FrameMesh;
 
@@ -26,7 +27,6 @@ class PUZZLEBOT_API APressurePlate : public AActor
 	UPROPERTY(EditInstanceOnly);
 	FLinearColor FrameColor = FLinearColor(0.880208f, 0.1203f, 0.7335950f);
 	
-public:	
 	// Sets default values for this actor's properties
 	APressurePlate();
 
@@ -35,18 +35,16 @@ public:
 	UPROPERTY(BlueprintAssignable)
 	FPlateStatusChanged OnPlateStatusChanged;
 
-	bool IsActivated();
-
-protected:
-	// Called when the game starts or when spawned
-	virtual void BeginPlay() override;
-
-public:	
+	virtual bool IsActivated();
+	
 	virtual void OnConstruction(const FTransform& Transform) override;
 
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
-private:
+protected:
+	// Called when the game starts or when spawned
+	virtual void BeginPlay() override;
+
 	int PawnsOnPlate = 0;
 
 	UPROPERTY(Transient) // If this isn't Transient it is sometimes NULL
@@ -56,11 +54,11 @@ private:
 	FTimeline PlateAnimation;
 
 	UFUNCTION()
-	void PlateAnimationInterp(float Value);
+	virtual void PlateAnimationInterp(float Value);
 
 	UFUNCTION()
-	void OnEnterPlate(class UPrimitiveComponent* OverlappedComp, class AActor* OtherActor, class UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
+	virtual void OnEnterPlate(class UPrimitiveComponent* OverlappedComp, class AActor* OtherActor, class UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
 
 	UFUNCTION()
-	void OnExitPlate(class UPrimitiveComponent* OverlappedComp, class AActor* OtherActor, class UPrimitiveComponent* OtherComp, int32 OtherBodyIndex);
+	virtual void OnExitPlate(class UPrimitiveComponent* OverlappedComp, class AActor* OtherActor, class UPrimitiveComponent* OtherComp, int32 OtherBodyIndex);
 };
