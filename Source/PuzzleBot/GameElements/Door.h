@@ -42,8 +42,14 @@ public:
 	UPROPERTY(EditInstanceOnly);
 	TArray<APressurePlate*> Triggers;
 
-	UPROPERTY(EditInstanceOnly);
+	UPROPERTY(EditAnywhere)
+	TSubclassOf<UCameraShakeBase> CameraShake;
+
+	UPROPERTY(EditAnywhere, Category = HeadsUpDisplay)
 	AMiniMapEventCamera* MiniMapEventCamera;
+
+	UPROPERTY(EditAnywhere, Category = HeadsUpDisplay)
+	float MiniMapEventTimeInSeconds = 1.5f;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = HeadsUpDisplay);
 	UHudUserWidget* HeadsUpDisplay;
@@ -74,9 +80,6 @@ private:
 	void OnDoorAnimationProgress(float Delta);
 
 	TObjectPtr<APlayerCameraManager> PlayerCameraManager;
-
-	UPROPERTY(EditAnywhere)
-	TSubclassOf<UCameraShakeBase> CameraShake;
 
 	USceneCaptureComponent2D* FindSceneCaptureComponent2D();
 };
