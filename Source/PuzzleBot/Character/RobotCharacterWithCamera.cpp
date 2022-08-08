@@ -146,3 +146,11 @@ void ARobotCharacterWithCamera::SetupMiniMap()
 		MiniMapCapture->TextureTarget = MiniMapTexture.Object;
 	}
 }
+
+void ARobotCharacterWithCamera::ToggleMiniMap(bool MiniMapStatus)
+{
+	if (!MiniMapCapture)
+		return;
+
+	MiniMapCapture->bCaptureEveryFrame = MiniMapStatus;
+}

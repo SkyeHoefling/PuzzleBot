@@ -29,6 +29,9 @@ public:
 
 	UPROPERTY(VisibleAnywhere)
 	USceneCaptureComponent2D* MiniMapCapture;
+
+	UFUNCTION(BlueprintCallable)
+	void ToggleMiniMap(bool MiniMapStatus);
 private:
 	void SetOverTheShoulderCamera();
 	void SetFixedRotationCamera();
