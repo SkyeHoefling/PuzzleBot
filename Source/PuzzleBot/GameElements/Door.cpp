@@ -104,9 +104,6 @@ void ADoor::OnPressurePlateStatusChanged(bool IsActivated)
 	{
 		if (HeadsUpDisplay && MiniMapEventCamera)
 		{
-			// RESEARCH - There is a slight delay (ms) from the previous technique
-			// We can improve this performance by creating an invisble bounding box
-			// and turning it on just before the player steps on the trigger
 			MiniMapEventCamera->ToggleCamera(true);
 			HeadsUpDisplay->MiniMapOverlayEvent(LiveEventMaterial);
 		}
