@@ -8,6 +8,7 @@
 #include "Camera/CameraActor.h"
 #include "../Maps/GameLevel.h"
 #include "EventTriggers/PressurePlate.h"
+#include "EventTriggers/MiniMapEventCamera.h"
 #include "DoorMoveCameraShake.h"
 #include "Door.generated.h"
 
@@ -41,6 +42,9 @@ public:
 	UPROPERTY(EditInstanceOnly);
 	TArray<APressurePlate*> Triggers;
 
+	UPROPERTY(EditInstanceOnly);
+	AMiniMapEventCamera* MiniMapEventCamera;
+
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = HeadsUpDisplay);
 	UHudUserWidget* HeadsUpDisplay;
 
@@ -67,7 +71,7 @@ private:
 	FTimeline DoorAnimationTimeline;
 
 	UFUNCTION()
-	void DoorAnimation(float Delta);
+	void OnDoorAnimationProgress(float Delta);
 
 	TObjectPtr<APlayerCameraManager> PlayerCameraManager;
 

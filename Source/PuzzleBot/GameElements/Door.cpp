@@ -74,10 +74,10 @@ void ADoor::BeginPlay()
 		FKeyHandle KeyHandle = DoorAnimationCurve->FloatCurve.AddKey(0.5f, 1.0f);
 		DoorAnimationCurve->FloatCurve.SetKeyTangentMode(KeyHandle, ERichCurveTangentMode::RCTM_Auto, true);
 
-		FOnTimelineFloat FloatFunction{};
-		FloatFunction.BindUFunction(this, "DoorAnimation");
+		FOnTimelineFloat OnDoorAnimationProgressFunction{};
+		OnDoorAnimationProgressFunction.BindUFunction(this, "OnDoorAnimationProgress");
 
-		DoorAnimationTimeline.AddInterpFloat(DoorAnimationCurve, FloatFunction, TEXT("Door Animation Function"));
+		DoorAnimationTimeline.AddInterpFloat(DoorAnimationCurve, OnDoorAnimationProgressFunction, TEXT("Door Animation Function"));
 
 		PlayerCameraManager = GetWorld()->GetFirstPlayerController()->PlayerCameraManager;
 	}
@@ -98,8 +98,9 @@ void ADoor::OnPressurePlateStatusChanged(bool IsActivated)
 {
 	if (IsActivated)
 	{
-		if (HeadsUpDisplay)
+		if (HeadsUpDisplay && MiniMapEventCamera)
 		{
+			MiniMapEventCamera->SceneCaptureComponent2D->bCaptureEveryFrame = true;
 			HeadsUpDisplay->MiniMapOverlayEvent(LiveEventMaterial);
 		}
 
@@ -128,7 +129,7 @@ void ADoor::OnPressurePlateStatusChanged(bool IsActivated)
 	}
 }
 
-void ADoor::DoorAnimation(float Delta)
+void ADoor::OnDoorAnimationProgress(float Delta)
 {
 	if (DoorAnimationTimeline.IsPlaying())
 	{
