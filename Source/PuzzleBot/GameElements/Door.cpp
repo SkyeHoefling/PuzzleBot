@@ -97,10 +97,9 @@ void ADoor::OnPressurePlateStatusChanged(bool IsActivated)
 {
 	if (IsActivated)
 	{
-		if (HeadsUpDisplay && MiniMapEventCamera)
+		if (HeadsUpDisplay && MiniMapCamera)
 		{
-			MiniMapEventCamera->ToggleCamera(true);
-			HeadsUpDisplay->MiniMapOverlayEvent(LiveEventMaterial, MiniMapEventCamera, MiniMapEventTimeInSeconds);
+			HeadsUpDisplay->MiniMapOverlayEvent(LiveEventMaterial, MiniMapCamera, MiniMapEventTimeInSeconds);
 		}
 
 		DoorAnimationTimeline.Play();

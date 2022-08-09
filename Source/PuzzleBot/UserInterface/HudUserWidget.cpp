@@ -3,6 +3,12 @@
 
 #include "HudUserWidget.h"
 
+void UHudUserWidget::CreateMiniMapController()
+{
+	MiniMapController = NewObject<UMiniMapController>();
+	MiniMapController->SetTimerManager(&GetWorld()->GetTimerManager());
+}
+
 void UHudUserWidget::SetLiveEventTexture(UMaterial* Material)
 {
 	if (!Material)

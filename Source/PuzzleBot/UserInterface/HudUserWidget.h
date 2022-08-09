@@ -4,7 +4,9 @@
 
 #include "CoreMinimal.h"
 #include "Blueprint/UserWidget.h"
-#include "../GameElements/EventTriggers/MiniMapEventCamera.h"
+#include "../Character/RobotCharacterWithCamera.h"
+#include "MiniMapController.h"
+#include "MiniMapCamera.h"
 #include "HudUserWidget.generated.h"
 
 /**
@@ -17,11 +19,17 @@ class PUZZLEBOT_API UHudUserWidget : public UUserWidget
 	
 public:
 	UFUNCTION(BlueprintImplementableEvent, meta = (DisplayName = "MiniMapOverlayEvent"))
-	void MiniMapOverlayEvent(UMaterial* NewLiveEventMaterial, AMiniMapEventCamera* MiniMapEventCamera, float EventTimeInSeconds);
+	void MiniMapOverlayEvent(UMaterial* NewLiveEventMaterial, AMiniMapCamera* MiniMapEventCamera, float EventTimeInSeconds);
 
 	UFUNCTION(BlueprintCallable)
 	void SetLiveEventTexture(UMaterial* Material);
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = HeadsUpDisplay);
 	UMaterial* LiveEventMaterial;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = MiniMap)
+	UMiniMapController* MiniMapController;
+
+	UFUNCTION(BlueprintCallable)
+	void CreateMiniMapController();
 };

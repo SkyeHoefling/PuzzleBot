@@ -8,7 +8,7 @@
 #include "Camera/CameraActor.h"
 #include "../Maps/GameLevel.h"
 #include "EventTriggers/PressurePlate.h"
-#include "EventTriggers/MiniMapEventCamera.h"
+#include "../UserInterface/MiniMapCamera.h"
 #include "DoorMoveCameraShake.h"
 #include "Door.generated.h"
 
@@ -46,7 +46,7 @@ public:
 	TSubclassOf<UCameraShakeBase> CameraShake;
 
 	UPROPERTY(EditAnywhere, Category = HeadsUpDisplay)
-	AMiniMapEventCamera* MiniMapEventCamera;
+	AMiniMapCamera* MiniMapCamera;
 
 	UPROPERTY(EditAnywhere, Category = HeadsUpDisplay)
 	float MiniMapEventTimeInSeconds = 1.5f;

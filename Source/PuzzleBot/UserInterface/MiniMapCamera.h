@@ -5,18 +5,18 @@
 #include "CoreMinimal.h"
 #include "Camera/CameraActor.h"
 #include "Components/SceneCaptureComponent2D.h"
-#include "MiniMapEventCamera.generated.h"
+#include "MiniMapCamera.generated.h"
 
 /**
  * 
  */
 UCLASS()
-class PUZZLEBOT_API AMiniMapEventCamera : public ACameraActor
+class PUZZLEBOT_API AMiniMapCamera : public ACameraActor
 {
 	GENERATED_BODY()
 
 public:
-	AMiniMapEventCamera();
+	AMiniMapCamera();
 	
 	UPROPERTY(VisibleAnywhere);
 	USceneCaptureComponent2D* SceneCaptureComponent2D;

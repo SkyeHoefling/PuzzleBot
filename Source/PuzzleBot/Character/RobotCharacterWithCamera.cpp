@@ -147,10 +147,7 @@ void ARobotCharacterWithCamera::SetupMiniMap()
 	}
 }
 
-void ARobotCharacterWithCamera::ToggleMiniMap(bool MiniMapStatus)
+USceneCaptureComponent2D* ARobotCharacterWithCamera::GetMiniMapCapture()
 {
-	if (!MiniMapCapture)
-		return;
-
-	MiniMapCapture->bCaptureEveryFrame = MiniMapStatus;
+	return MiniMapCapture;
 }
