@@ -19,11 +19,13 @@ ARobotCharacter::ARobotCharacter()
 	}
 
 	// set animation for mesh
-	static ConstructorHelpers::FObjectFinder<UAnimBlueprint> AnimationBlueprint(TEXT("AnimBlueprint'/Game/Character/Animations/APB_Bot.APB_Bot'"));
+	// The suffix '_C' is needed to grab the animation blueprint as  UClass object
+	static ConstructorHelpers::FObjectFinder<UClass> AnimationBlueprint(TEXT("/Game/Character/Animations/APB_Bot.APB_Bot_C"));
 	if (AnimationBlueprint.Succeeded())
 	{
+		//UAnimBlueprint* BotAnimation = Cast<UAnimBlueprint>(AnimationBlueprint.Object);
 		VisualMesh->SetAnimationMode(EAnimationMode::AnimationBlueprint);
-		VisualMesh->SetAnimInstanceClass(AnimationBlueprint.Object->GetAnimBlueprintGeneratedClass());
+		VisualMesh->SetAnimInstanceClass(AnimationBlueprint.Object);
 	}
 
 	// Set transform
