@@ -16,7 +16,12 @@ AOrb::AOrb()
 	{
 		StaticMesh->SetStaticMesh(OrbVisualAsset.Object);
 	}
+}
 
+// Called when the game starts or when spawned
+void AOrb::BeginPlay()
+{
+	Super::BeginPlay();
 
 	// prevent physical collisions with pawns and camera
 	StaticMesh->SetGenerateOverlapEvents(true);
@@ -25,12 +30,6 @@ AOrb::AOrb()
 	StaticMesh->SetCanEverAffectNavigation(false); // Prevents nav tree from getting stuck (ignores orb for nav paths)
 
 	StaticMesh->OnComponentBeginOverlap.AddDynamic(this, &AOrb::OnOrbCollected);
-}
-
-// Called when the game starts or when spawned
-void AOrb::BeginPlay()
-{
-	Super::BeginPlay();
 }
 
 // Called every frame

@@ -17,9 +17,6 @@ ACrate::ACrate()
 	{
 		VisualMesh->SetStaticMesh(CrateVisualAsset.Object);
 	}
-
-	VisualMesh->SetSimulatePhysics(true);
-	VisualMesh->SetMassOverrideInKg(NAME_None, 50.0f);
 }
 
 // Called when the game starts or when spawned
@@ -27,12 +24,12 @@ void ACrate::BeginPlay()
 {
 	Super::BeginPlay();
 	
+	VisualMesh->SetSimulatePhysics(true);
+	VisualMesh->SetMassOverrideInKg(NAME_None, 50.0f);
 }
 
 // Called every frame
 void ACrate::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
 }
-
