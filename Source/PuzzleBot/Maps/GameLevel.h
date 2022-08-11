@@ -15,6 +15,12 @@ class PUZZLEBOT_API AGameLevel : public ALevelScriptActor
 {
 	GENERATED_BODY()
 public:
+	UFUNCTION(BlueprintImplementableEvent, Category = PauseMenu, meta = (DisplayName = "TogglePauseMenu"))
+	void TogglePauseMenu(bool isGamepad);
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = PauseMenu);
+	UUserWidget* PauseMenu;
+
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = HeadsUpDisplay);
 	UHudUserWidget* HeadsUpDisplay;
 };

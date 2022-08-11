@@ -21,6 +21,12 @@ void ARobotPlayerController::SetupInputComponent()
 	// Interactions
 	InputComponent->BindAction("SpawnOrb", IE_Pressed, this, &ARobotPlayerController::SpawnOrb);
 	InputComponent->BindAction("ToggleCamera", IE_Pressed, this, &ARobotPlayerController::ToggleCamera);
+	
+	FInputActionBinding& ToggleMenuGamepadBinding = InputComponent->BindAction("ToggleMenuGamepad", IE_Pressed, this, &ARobotPlayerController::ToggleMenuGamepad);
+	ToggleMenuGamepadBinding.bExecuteWhenPaused = true;
+
+	FInputActionBinding& ToggleMenuKeyboard = InputComponent->BindAction("ToggleMenuKeyboard", IE_Pressed, this, &ARobotPlayerController::ToggleMenuKeyboard);
+	ToggleMenuKeyboard.bExecuteWhenPaused = true;
 }
 
 void ARobotPlayerController::MoveY(float AxisValue)
@@ -71,4 +77,22 @@ void ARobotPlayerController::SpawnOrb()
 void ARobotPlayerController::ToggleCamera()
 {
 	Robot->ToggleCamera();
+}
+
+void ARobotPlayerController::ToggleMenuGamepad()
+{
+	AGameLevel* CurrentLevel = Cast<AGameLevel>(GetWorld()->GetLevelScriptActor());
+	if (CurrentLevel)
+	{
+		CurrentLevel->TogglePauseMenu(true);
+	}
+}
+
+void ARobotPlayerController::ToggleMenuKeyboard()
+{
+	AGameLevel* CurrentLevel = Cast<AGameLevel>(GetWorld()->GetLevelScriptActor());
+	if (CurrentLevel)
+	{
+		CurrentLevel->TogglePauseMenu(false);
+	}
 }

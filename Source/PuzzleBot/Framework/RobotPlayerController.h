@@ -6,6 +6,7 @@
 #include "GameFramework/PlayerController.h"
 #include "../Character/RobotCharacterWithCamera.h"
 #include "../GameElements/Orb.h"
+#include "../Maps/GameLevel.h"
 #include "RobotPlayerController.generated.h"
 
 /**
@@ -25,6 +26,8 @@ public:
 	void SpringArmX(float AxisValue);
 	void SpawnOrb();
 	void ToggleCamera();
+	void ToggleMenuGamepad();
+	void ToggleMenuKeyboard();
 
 	ARobotCharacterWithCamera* Robot;
 protected:
