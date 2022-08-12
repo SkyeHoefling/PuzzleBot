@@ -29,6 +29,7 @@ void UMiniMapController::RenderLiveEvent(
 
 	LiveEventCamera->ToggleCamera(true);
 	MiniMapCapture->bCaptureEveryFrame = false;
+	MiniMapCapture->bCaptureOnMovement = false;
 
 	MiniMapImage->SetBrushFromMaterial(LiveEventMaterial);
 }
@@ -36,6 +37,7 @@ void UMiniMapController::RenderLiveEvent(
 void UMiniMapController::RenderLiveEvent_Elapsed(AMiniMapCamera* LiveEventCamera)
 {
 	MiniMapCapture->bCaptureEveryFrame = true;
+	MiniMapCapture->bCaptureOnMovement = true;
 	MiniMapImage->SetBrushFromMaterial(MiniMapMaterial);
 	LiveEventCamera->ToggleCamera(false);
 }
