@@ -6,9 +6,9 @@
 #include "GameFramework/Actor.h"
 #include "Blueprint/UserWidget.h"
 #include "Camera/CameraActor.h"
-#include "../Maps/GameLevel.h"
 #include "EventTriggers/PressurePlate.h"
 #include "../UserInterface/MiniMapCamera.h"
+#include "../UserInterface/HudUserWidget.h"
 #include "DoorMoveCameraShake.h"
 #include "Door.generated.h"
 

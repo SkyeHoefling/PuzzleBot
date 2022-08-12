@@ -4,9 +4,8 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/PlayerController.h"
-#include "../Character/RobotCharacterWithCamera.h"
+#include "../Character/PlayerCharacter.h"
 #include "../GameElements/Orb.h"
-#include "../Maps/GameLevel.h"
 #include "RobotPlayerController.generated.h"
 
 /**
@@ -29,7 +28,7 @@ public:
 	void ToggleMenuGamepad();
 	void ToggleMenuKeyboard();
 
-	ARobotCharacterWithCamera* Robot;
+	APlayerCharacter* PlayerCharacter;
 protected:
 	virtual void BeginPlay() override;
 };

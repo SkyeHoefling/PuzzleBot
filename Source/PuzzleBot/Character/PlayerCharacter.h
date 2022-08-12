@@ -3,24 +3,25 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "Engine/LevelScriptActor.h"
+#include "RobotCharacterWithCamera.h"
 #include "../UserInterface/HudUserWidget.h"
-#include "GameLevel.generated.h"
+#include "PlayerCharacter.generated.h"
 
 /**
  * 
  */
 UCLASS()
-class PUZZLEBOT_API AGameLevel : public ALevelScriptActor
+class PUZZLEBOT_API APlayerCharacter : public ARobotCharacterWithCamera
 {
 	GENERATED_BODY()
+	
 public:
 	UFUNCTION(BlueprintImplementableEvent, Category = PauseMenu, meta = (DisplayName = "TogglePauseMenu"))
 	void TogglePauseMenu(bool isGamepad);
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = PauseMenu);
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = PauseMenu)
 	UUserWidget* PauseMenu;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = HeadsUpDisplay);
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = HeadsUpDisplay)
 	UHudUserWidget* HeadsUpDisplay;
 };

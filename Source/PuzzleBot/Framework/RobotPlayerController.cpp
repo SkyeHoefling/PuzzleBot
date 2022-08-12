@@ -5,7 +5,7 @@
 
 void ARobotPlayerController::BeginPlay()
 {
-	Robot = Cast<ARobotCharacterWithCamera>(GetCharacter());
+	PlayerCharacter = Cast<APlayerCharacter>(GetCharacter());
 }
 
 void ARobotPlayerController::SetupInputComponent()
@@ -31,68 +31,66 @@ void ARobotPlayerController::SetupInputComponent()
 
 void ARobotPlayerController::MoveY(float AxisValue)
 {
-	if (!Robot)
+	if (!PlayerCharacter)
 		return;
 
-	FRotator Rotation = Robot->SpringArm->GetRelativeRotation();
+	FRotator Rotation = PlayerCharacter->SpringArm->GetRelativeRotation();
 	Rotation.Pitch = 0;
 	FVector Direction = Rotation.Vector();
-	Robot->AddMovementInput(Direction, AxisValue);
+	PlayerCharacter->AddMovementInput(Direction, AxisValue);
 }
 
 void ARobotPlayerController::MoveX(float AxisValue)
 {
-	if (!Robot)
+	if (!PlayerCharacter)
 		return;
 
-	FRotator Rotation = Robot->SpringArm->GetRelativeRotation();
+	FRotator Rotation = PlayerCharacter->SpringArm->GetRelativeRotation();
 	Rotation.Pitch = 0;
 	Rotation.Yaw += 90;
 	FVector Direction = Rotation.Vector();
-	Robot->AddMovementInput(Direction, AxisValue);
+	PlayerCharacter->AddMovementInput(Direction, AxisValue);
 }
 
 void ARobotPlayerController::SpringArmY(float AxisValue)
 {
-	if (!Robot)
+	if (!PlayerCharacter)
 		return;
 
-	Robot->SpringArmY(AxisValue);
+	PlayerCharacter->SpringArmY(AxisValue);
 }
 
 void ARobotPlayerController::SpringArmX(float AxisValue)
 {
-	if (!Robot)
+	if (!PlayerCharacter)
 		return;
 
-	Robot->SpringArmX(AxisValue);
+	PlayerCharacter->SpringArmX(AxisValue);
 }
 
 void ARobotPlayerController::SpawnOrb()
 {
-	FVector Location = Robot->GetActorLocation();
+	FVector Location = PlayerCharacter->GetActorLocation();
 	GetWorld()->SpawnActor(AOrb::StaticClass(), &Location);
 }
 
 void ARobotPlayerController::ToggleCamera()
 {
-	Robot->ToggleCamera();
+	PlayerCharacter->ToggleCamera();
 }
 
 void ARobotPlayerController::ToggleMenuGamepad()
 {
-	AGameLevel* CurrentLevel = Cast<AGameLevel>(GetWorld()->GetLevelScriptActor());
-	if (CurrentLevel)
-	{
-		CurrentLevel->TogglePauseMenu(true);
-	}
+	if (!PlayerCharacter)
+		return;
+
+	PlayerCharacter->TogglePauseMenu(true);
 }
 
 void ARobotPlayerController::ToggleMenuKeyboard()
 {
-	AGameLevel* CurrentLevel = Cast<AGameLevel>(GetWorld()->GetLevelScriptActor());
-	if (CurrentLevel)
-	{
-		CurrentLevel->TogglePauseMenu(false);
-	}
+	if (!PlayerCharacter)
+		return;
+
+	PlayerCharacter->TogglePauseMenu(false);
 }
