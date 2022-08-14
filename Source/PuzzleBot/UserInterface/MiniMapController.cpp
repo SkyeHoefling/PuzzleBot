@@ -10,34 +10,32 @@ void UMiniMapController::SetTimerManager(FTimerManager* NewTimerManager)
 
 void UMiniMapController::SetupController(
 	UImage* NewMiniMapImage, 
-	USceneCaptureComponent2D* NewMiniMapCapture,
+	UMiniMapSceneCaptureComponent* NewMiniMapCamera,
 	UMaterialInterface* NewMiniMapMaterial)
 {
 	MiniMapImage = NewMiniMapImage;
-	MiniMapCapture = NewMiniMapCapture;
+	MiniMapCamera = NewMiniMapCamera;
 	MiniMapMaterial = NewMiniMapMaterial;
 }
 
+// this method still can drop the framerate by about 10fps
 void UMiniMapController::RenderLiveEvent(
 	UMaterialInterface* LiveEventMaterial, 
-	AMiniMapCamera* LiveEventCamera,
+	UMiniMapSceneCaptureComponent* LiveEventCamera,
 	float TimeInSeconds)
 {
 	FTimerDelegate TimerFinishedDelegate;
 	TimerFinishedDelegate.BindUFunction(this, "RenderLiveEvent_Elapsed", LiveEventCamera);
 	TimerManager->SetTimer(TimerHandle, TimerFinishedDelegate, TimeInSeconds, false);;
 
+	MiniMapCamera->ToggleCamera(false);
 	LiveEventCamera->ToggleCamera(true);
-	MiniMapCapture->bCaptureEveryFrame = false;
-	MiniMapCapture->bCaptureOnMovement = false;
-
 	MiniMapImage->SetBrushFromMaterial(LiveEventMaterial);
 }
 
-void UMiniMapController::RenderLiveEvent_Elapsed(AMiniMapCamera* LiveEventCamera)
+void UMiniMapController::RenderLiveEvent_Elapsed(UMiniMapSceneCaptureComponent* LiveEventCamera)
 {
-	MiniMapCapture->bCaptureEveryFrame = true;
-	MiniMapCapture->bCaptureOnMovement = true;
-	MiniMapImage->SetBrushFromMaterial(MiniMapMaterial);
 	LiveEventCamera->ToggleCamera(false);
+	MiniMapCamera->ToggleCamera(true);
+	MiniMapImage->SetBrushFromMaterial(MiniMapMaterial);
 }

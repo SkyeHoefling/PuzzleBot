@@ -80,6 +80,11 @@ void ADoor::BeginPlay()
 
 		PlayerCameraManager = GetWorld()->GetFirstPlayerController()->PlayerCameraManager;
 	}
+
+	if (MiniMapCamera)
+	{
+		MiniMapCaptureComponent = Cast<UMiniMapSceneCaptureComponent>(MiniMapCamera->GetComponentByClass(UMiniMapSceneCaptureComponent::StaticClass()));
+	}
 }
 
 // Called every frame
@@ -97,9 +102,9 @@ void ADoor::OnPressurePlateStatusChanged(bool IsActivated)
 {
 	if (IsActivated)
 	{
-		if (HeadsUpDisplay && MiniMapCamera)
+		if (HeadsUpDisplay && MiniMapCaptureComponent)
 		{
-			HeadsUpDisplay->MiniMapOverlayEvent(LiveEventMaterial, MiniMapCamera, MiniMapEventTimeInSeconds);
+			HeadsUpDisplay->MiniMapOverlayEvent(LiveEventMaterial, MiniMapCaptureComponent, MiniMapEventTimeInSeconds);
 		}
 
 		DoorAnimationTimeline.Play();

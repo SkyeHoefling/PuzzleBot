@@ -19,7 +19,7 @@ class PUZZLEBOT_API UHudUserWidget : public UUserWidget
 	
 public:
 	UFUNCTION(BlueprintImplementableEvent, meta = (DisplayName = "MiniMapOverlayEvent"))
-	void MiniMapOverlayEvent(UMaterial* NewLiveEventMaterial, AMiniMapCamera* MiniMapEventCamera, float EventTimeInSeconds);
+	void MiniMapOverlayEvent(UMaterial* NewLiveEventMaterial, UMiniMapSceneCaptureComponent* MiniMapEventCamera, float EventTimeInSeconds);
 
 	UFUNCTION(BlueprintCallable)
 	void SetLiveEventTexture(UMaterial* Material);

@@ -4,9 +4,9 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
-#include "Components/SceneCaptureComponent2D.h"
 #include "Engine/TextureRenderTarget2D.h"
 #include "RobotCharacter.h"
+#include "../UserInterface/MiniMapSceneCaptureComponent.h"
 #include "RobotCharacterWithCamera.generated.h"
 
 UCLASS()
@@ -27,11 +27,11 @@ public:
 	UPROPERTY(VisibleAnywhere)
 	UCameraComponent* MiniMapCamera;
 
-	UPROPERTY(VisibleAnywhere)
-	USceneCaptureComponent2D* MiniMapCapture;
+	UPROPERTY(VisibleAnywhere, Transient)
+	UMiniMapSceneCaptureComponent* MiniMapCapture;
 
 	UFUNCTION(BlueprintCallable)
-	USceneCaptureComponent2D* GetMiniMapCapture();
+	UMiniMapSceneCaptureComponent* GetMiniMapCapture();
 private:
 	void SetOverTheShoulderCamera();
 	void SetFixedRotationCamera();

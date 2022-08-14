@@ -46,7 +46,7 @@ public:
 	TSubclassOf<UCameraShakeBase> CameraShake;
 
 	UPROPERTY(EditAnywhere, Category = HeadsUpDisplay)
-	AMiniMapCamera* MiniMapCamera;
+	ACameraActor* MiniMapCamera;
 
 	UPROPERTY(EditAnywhere, Category = HeadsUpDisplay)
 	float MiniMapEventTimeInSeconds = 1.5f;
@@ -60,6 +60,7 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
+	UMiniMapSceneCaptureComponent* MiniMapCaptureComponent;
 public:	
 	// Called when Actor is being constructed
 	virtual void OnConstruction(const FTransform& Transform) override;

@@ -7,7 +7,7 @@
 #include "Engine/EngineTypes.h"
 #include "Components/Image.h"
 #include "Components/SceneCaptureComponent2D.h"
-#include "MiniMapCamera.h"
+#include "MiniMapSceneCaptureComponent.h"
 #include "MiniMapController.generated.h"
 
 /**
@@ -22,20 +22,20 @@ public:
 	typedef void (UMiniMapController::*ToggleCamera)(bool);
 
 	UFUNCTION(BlueprintCallable)
-	void SetupController(UImage* NewMiniMapImage, USceneCaptureComponent2D* NewMiniMapCapture , UMaterialInterface* NewMiniMapMaterial);
+	void SetupController(UImage* NewMiniMapImage, UMiniMapSceneCaptureComponent* NewMiniMapCamera, UMaterialInterface* NewMiniMapMaterial);
 
 	UFUNCTION(BlueprintCallable)
-	void RenderLiveEvent(UMaterialInterface* LiveEventMaterial, AMiniMapCamera* LiveEventCamera, float TimeInSeconds = 1.5f);
+	void RenderLiveEvent(UMaterialInterface* LiveEventMaterial, UMiniMapSceneCaptureComponent* LiveEventCamera, float TimeInSeconds = 1.5f);
 
 	void SetTimerManager(FTimerManager* NewTimerManager);
 protected:
 	UImage* MiniMapImage;
-	USceneCaptureComponent2D* MiniMapCapture;
+	UMiniMapSceneCaptureComponent* MiniMapCamera;
 	UMaterialInterface* MiniMapMaterial;
 	FTimerManager* TimerManager;
 
 	UFUNCTION()
-	void RenderLiveEvent_Elapsed(AMiniMapCamera* LiveEventCamera);
+	void RenderLiveEvent_Elapsed(UMiniMapSceneCaptureComponent* LiveEventCamera);
 private:
-	FTimerHandle TimerHandle;	
+	FTimerHandle TimerHandle;
 };
