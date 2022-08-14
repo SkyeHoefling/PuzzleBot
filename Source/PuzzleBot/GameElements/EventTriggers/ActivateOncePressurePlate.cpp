@@ -11,12 +11,14 @@ void AActivateOncePressurePlate::OnEnterPlate(
 	bool bFromSweep,
 	const FHitResult& SweepResult)
 {
-	// TODO - call super
+	if (IsPlateActivated)
+		return;
+
 	PawnsOnPlate++;
 	IsPlateActivated = true;
 	if (PawnsOnPlate == 1)
 	{
-		OnPlateStatusChanged.Broadcast(true);
+		OnPlateStatusChanged.Broadcast(true, this);
 		PlateAnimation.Play();
 	}
 }
