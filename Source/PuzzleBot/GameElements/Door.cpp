@@ -98,10 +98,14 @@ void ADoor::Tick(float DeltaTime)
 	}
 }
 
-void ADoor::OnPressurePlateStatusChanged(bool IsActivated)
+void ADoor::OnPressurePlateStatusChanged(bool IsActivated, APressurePlate* ActivatedTrigger)
 {
 	if (IsActivated)
 	{
+		// If any other triggers are activated skip logic
+		if (IsAnyTriggerActive(ActivatedTrigger))
+			return;
+
 		if (HeadsUpDisplay && MiniMapCaptureComponent)
 		{
 			HeadsUpDisplay->MiniMapOverlayEvent(LiveEventMaterial, MiniMapCaptureComponent, MiniMapEventTimeInSeconds);
@@ -116,12 +120,9 @@ void ADoor::OnPressurePlateStatusChanged(bool IsActivated)
 	}
 	else
 	{
-		// check if any other door triggers are activated. If so ignore state change
-		for (APressurePlate* Current : Triggers)
-		{
-			if (Current->IsActivated())
-				return;
-		}
+		// check if any door triggers are activated. If so ignore state change
+		if (IsAnyTriggerActive(NULL))
+			return;
 
 		if (CameraShake)
 		{
@@ -130,6 +131,23 @@ void ADoor::OnPressurePlateStatusChanged(bool IsActivated)
 
 		DoorAnimationTimeline.Reverse();
 	}
+}
+
+bool ADoor::IsAnyTriggerActive(APressurePlate* TriggerToIgnore)
+{
+	if (Triggers.Num() <= 0)
+		return false;
+
+	for (APressurePlate* Current : Triggers)
+	{
+		if (Current == TriggerToIgnore)
+			continue;
+
+		if (Current->IsActivated())
+			return true;
+	}
+
+	return false;
 }
 
 void ADoor::OnDoorAnimationProgress(float Delta)

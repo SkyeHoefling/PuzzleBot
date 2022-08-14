@@ -69,7 +69,7 @@ public:
 	virtual void Tick(float DeltaTime) override;
 private:
 	UFUNCTION()
-	void OnPressurePlateStatusChanged(bool IsActivated);
+	void OnPressurePlateStatusChanged(bool IsActivated, APressurePlate* ActivatedTrigger);
 
 	UPROPERTY(Transient)
 	UCurveFloat* DoorAnimationCurve;
@@ -79,6 +79,8 @@ private:
 
 	UFUNCTION()
 	void OnDoorAnimationProgress(float Delta);
+
+	bool IsAnyTriggerActive(APressurePlate* TriggerToIgnore);
 
 	TObjectPtr<APlayerCameraManager> PlayerCameraManager;
 

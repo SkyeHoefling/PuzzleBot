@@ -92,7 +92,7 @@ void APressurePlate::OnEnterPlate(
 	PawnsOnPlate++;
 	if (PawnsOnPlate == 1)
 	{
-		OnPlateStatusChanged.Broadcast(true);
+		OnPlateStatusChanged.Broadcast(true, this);
 		PlateAnimation.Play();
 	}
 }
@@ -107,7 +107,7 @@ void APressurePlate::OnExitPlate(
 	
 	if (PawnsOnPlate == 0)
 	{
-		OnPlateStatusChanged.Broadcast(false);
+		OnPlateStatusChanged.Broadcast(false, this);
 		PlateAnimation.Reverse();
 	}
 }

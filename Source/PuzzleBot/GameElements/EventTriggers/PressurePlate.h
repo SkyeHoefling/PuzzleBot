@@ -30,7 +30,7 @@ public:
 	// Sets default values for this actor's properties
 	APressurePlate();
 
-	DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FPlateStatusChanged, bool, IsActivated);
+	DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FPlateStatusChanged, bool, IsActivated, APressurePlate*, ActivatedTrigger);
 
 	UPROPERTY(BlueprintAssignable)
 	FPlateStatusChanged OnPlateStatusChanged;
